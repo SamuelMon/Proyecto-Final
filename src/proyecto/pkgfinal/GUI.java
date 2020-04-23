@@ -30,7 +30,7 @@ public class GUI extends javax.swing.JFrame {
     
     
     
-    
+    //Prueba
     
     
     
