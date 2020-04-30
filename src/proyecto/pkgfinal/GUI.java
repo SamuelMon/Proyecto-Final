@@ -5,7 +5,10 @@
  */
 package proyecto.pkgfinal;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Random;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,13 +17,19 @@ import javax.swing.JOptionPane;
  */
 public class GUI extends javax.swing.JFrame {
 
-    public String[] question = new String[5];
+    public Random rdn = new Random();
+    public String[] questionType1 = new String[5];
+    public String[] questionType3 = new String[5];
+
+
     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
     }
+    
+
 
     
     
@@ -36,8 +45,8 @@ public class GUI extends javax.swing.JFrame {
         
     //Genera un caso aleartorio de la pregunta tipo 1
     public String[] preguntaTipo1(){
-        Random rdn = new Random();
-        String[] question = new String[5];
+        
+        String[] questionType1 = new String[5];
         String message = "";
         int upperLimit = rdn.nextInt(2000)-990;
         int lowerLimit = rdn.nextInt(2000)-1000;
@@ -228,13 +237,40 @@ public class GUI extends javax.swing.JFrame {
         }//Fin switch
         
         // Asigno a las posiciones de un vector todo lo necesario para imprimir en pantalla la pregunta generada    
-        question[0] = message;
-        question[1] = String.valueOf(correctAnswer);
-        question[2] = String.valueOf(option1);
-        question[3] = String.valueOf(option2);
-        question[4] = String.valueOf(option3);
-        return question;
+        questionType1[0] = message;
+        questionType1[1] = String.valueOf(correctAnswer);
+        questionType1[2] = String.valueOf(option1);
+        questionType1[3] = String.valueOf(option2);
+        questionType1[4] = String.valueOf(option3);
+        return questionType1;
     }
+    
+    
+    public String[] preguntatipo3(){
+        String[][] equationMatrix = new String [50][5];
+        int rdnQuestion=rdn.nextInt(50);
+        
+        try{
+            File equationFile = new File("preguntaEcuacion.txt");
+            Scanner scan = new Scanner(equationFile);
+            
+            for (int i = 0; i < 50; i++) {
+                for (int j = 0; j < 5; j++) {
+                    String line = scan.nextLine();
+                    equationMatrix[i][j]= line;
+                }
+            }
+            for(int i = 0; i < 5; i++) {
+                questionType3[i] = equationMatrix[rdnQuestion][i];
+            }
+            return (questionType3);
+        }
+        catch(FileNotFoundException e){
+            JOptionPane.showConfirmDialog(null,"El pinchi archivo no existe");
+        }
+        return null;
+    }
+    
     // Fin Metodos
     /**
      * This method is called from within the constructor to initialize the form.
@@ -245,21 +281,79 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Iniciar = new javax.swing.JButton();
+        ecuacion = new javax.swing.JLabel();
+        opcion1 = new javax.swing.JLabel();
+        opcion2 = new javax.swing.JLabel();
+        opcion3 = new javax.swing.JLabel();
+        opcion4 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Iniciar.setText("Iniciar");
+        Iniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IniciarActionPerformed(evt);
+            }
+        });
+
+        ecuacion.setText("jLabel1");
+
+        opcion1.setText("jLabel1");
+
+        opcion2.setText("jLabel2");
+
+        opcion3.setText("jLabel3");
+
+        opcion4.setText("jLabel4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(167, Short.MAX_VALUE)
+                .addComponent(Iniciar)
+                .addGap(150, 150, 150))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(opcion4)
+                    .addComponent(opcion3)
+                    .addComponent(opcion2)
+                    .addComponent(opcion1)
+                    .addComponent(ecuacion))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(Iniciar)
+                .addGap(51, 51, 51)
+                .addComponent(ecuacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(opcion1)
+                .addGap(18, 18, 18)
+                .addComponent(opcion2)
+                .addGap(18, 18, 18)
+                .addComponent(opcion3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(opcion4)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarActionPerformed
+        questionType3 = preguntatipo3();
+        ecuacion.setText(questionType3[0]);
+        opcion1.setText(questionType3[1]);
+        opcion2.setText(questionType3[2]);
+        opcion3.setText(questionType3[3]);
+        opcion4.setText(questionType3[4]);
+    }//GEN-LAST:event_IniciarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,5 +391,11 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Iniciar;
+    private javax.swing.JLabel ecuacion;
+    private javax.swing.JLabel opcion1;
+    private javax.swing.JLabel opcion2;
+    private javax.swing.JLabel opcion3;
+    private javax.swing.JLabel opcion4;
     // End of variables declaration//GEN-END:variables
 }
