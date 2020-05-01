@@ -17,6 +17,7 @@ public class ProyectoFinal {
     public static void main(String[] args) {
         GUI interfaz = new GUI();
         interfaz.setVisible(true);
+        interfaz.setLocationRelativeTo(null);
     }
 
 }

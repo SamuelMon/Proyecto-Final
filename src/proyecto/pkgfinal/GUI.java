@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
 public class GUI extends javax.swing.JFrame {
 
     public Random rdn = new Random();
-    public String[] questionType1 = new String[5];
-    public String[] questionType3 = new String[5];
+    public String[] questionType4 = new String[5];
+    public int count = 0 ;
 
 
     /**
@@ -45,9 +45,8 @@ public class GUI extends javax.swing.JFrame {
         
     //Genera un caso aleartorio de la pregunta tipo 1
     public String[] preguntaTipo1(){
-        
         String[] questionType1 = new String[5];
-        String message = "";
+        String range = "";
         int upperLimit = rdn.nextInt(2000)-990;
         int lowerLimit = rdn.nextInt(2000)-1000;
         int combination = rdn.nextInt(4);
@@ -76,7 +75,7 @@ public class GUI extends javax.swing.JFrame {
             {
                 //Asigno a la variable correctAnswer un valor que se encuentre en el intervalo generado
                 correctAnswer = lowerLimit + rdn.nextInt(upperLimit - lowerLimit + 1);
-                message = "Cual de las siguientes opciones pertenece a intervalo definido por [ " + lowerLimit + " , " + upperLimit + "] .".toString();
+                range = "[ " + lowerLimit + " , " + upperLimit + " ] .".toString();
                 
                 // Estos if sirven para tener en cuente la posibilidades a la hora de mostrar posibles 
                 // respuestas.
@@ -115,7 +114,7 @@ public class GUI extends javax.swing.JFrame {
                 {
                     //Asigno a la variable correctAnswer un valor que se encuentre en el intervalo generado
                     correctAnswer = lowerLimit + rdn.nextInt(upperLimit - lowerLimit );
-                    message = "Cual de las siguientes opciones pertenece a intervalo definido por [ " + lowerLimit + " , " + upperLimit + ") .".toString();
+                    range = "[ " + lowerLimit + " , " + upperLimit + " ) .".toString();
 
                     // Estos if sirven para tener en cuente la posibilidades a la hora de mostrar posibles 
                     // respuestas.
@@ -154,7 +153,7 @@ public class GUI extends javax.swing.JFrame {
             {
                 //Asigno a la variable correctAnswer un valor que se encuentre en el intervalo generado
                 correctAnswer = 1 + lowerLimit + rdn.nextInt(upperLimit - lowerLimit );
-                message = "Cual de las siguientes opciones pertenece a intervalo definido por ( " + lowerLimit + " , " + upperLimit + "] .".toString();
+                range = "( " + lowerLimit + " , " + upperLimit + " ] .".toString();
                 
                 // Estos if sirven para tener en cuente la posibilidades a la hora de mostrar posibles 
                 // respuestas.
@@ -193,7 +192,7 @@ public class GUI extends javax.swing.JFrame {
             {
                 //Asigno a la variable correctAnswer un valor que se encuentre en el intervalo generado
                 correctAnswer = 1+ lowerLimit + rdn.nextInt(upperLimit - lowerLimit - 1);
-                message = "Cual de las siguientes opciones pertenece a intervalo definido por ( " + lowerLimit + " , " + upperLimit + ") .".toString();
+                range = "( " + lowerLimit + " , " + upperLimit + " ) .".toString();
                 
                 // Estos if sirven para tener en cuente la posibilidades a la hora de mostrar posibles 
                 // respuestas.
@@ -237,38 +236,123 @@ public class GUI extends javax.swing.JFrame {
         }//Fin switch
         
         // Asigno a las posiciones de un vector todo lo necesario para imprimir en pantalla la pregunta generada    
-        questionType1[0] = message;
+        questionType1[0] = range;
         questionType1[1] = String.valueOf(correctAnswer);
         questionType1[2] = String.valueOf(option1);
         questionType1[3] = String.valueOf(option2);
         questionType1[4] = String.valueOf(option3);
+        
+        
         return questionType1;
     }
     
     
     public String[] preguntatipo3(){
+        
+        //Declaro las variables necesacria para generar y retornar una pregunta tipo 3
+        String[] questionType3 = new String[5];
         String[][] equationMatrix = new String [50][5];
         int rdnQuestion=rdn.nextInt(50);
         
         try{
+            //Declaro una variable de tipo File y la inicializo con un archivo txt
+            //previamente preparado con un formato repetitivo
             File equationFile = new File("preguntaEcuacion.txt");
+            
+            //Declaro una variable tipo Scanner , que sera la que lea el objeto 
+            //tipo File
             Scanner scan = new Scanner(equationFile);
             
+            //Con estos dos ciclos recorro una matriz y voy asignando un valor a cada 
+            //posicion, este valor asignado es una linea del archivo previamente declarado
             for (int i = 0; i < 50; i++) {
                 for (int j = 0; j < 5; j++) {
                     String line = scan.nextLine();
                     equationMatrix[i][j]= line;
                 }
             }
+            
+            //Con este ciclo asigno a un vector de tipo string una fila de la matriz 
+            //previamente llenada
             for(int i = 0; i < 5; i++) {
                 questionType3[i] = equationMatrix[rdnQuestion][i];
             }
-            return (questionType3);
+            
+            //retorno el vector que contiene todo lo neesario para imprimir una pregunta
+            //de tipo 3
+            return questionType3;
+            
         }
         catch(FileNotFoundException e){
             JOptionPane.showConfirmDialog(null,"El pinchi archivo no existe");
+            return null;
         }
-        return null;
+    }
+    
+    public String[] preguntaTipo4(){
+        
+        //Declaro las variables necesacria para generar y retornar una pregunta tipo 4
+        String[] questionType4 = new String[5];
+        int radio = rdn.nextInt(13)+1;
+        int height = rdn.nextInt(20)+1;
+        int combination = rdn.nextInt(4);
+        String question = "r= " + radio + " m" + ", h= " + height + "m";
+        int correctAnswer =(int) (Math.pow(radio,2) * height);
+        int option1 = 0;
+        int option2 = 0;
+        int option3 = 0;
+        
+        //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
+        //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
+        if (combination == 0 )
+        {
+            option1 = correctAnswer + rdn.nextInt(10) + 1;
+            option2 = correctAnswer + rdn.nextInt(5) + 1;
+            option3 = correctAnswer + rdn.nextInt(15) + 1;
+        }
+
+        if (combination == 1 )
+        {
+            option1 = correctAnswer - rdn.nextInt(10) - 1;
+            option2 = correctAnswer - rdn.nextInt(5) - 1;
+            option3 = correctAnswer - rdn.nextInt(15) - 1;
+        }
+
+        if (combination == 2 )
+        {
+            option1 = correctAnswer - rdn.nextInt(10) - 1;
+            option2 = correctAnswer + rdn.nextInt(5) + 1;
+            option3 = correctAnswer - rdn.nextInt(15) - 1;
+        }
+
+        if (combination == 3 )
+        {
+            option1 = correctAnswer + rdn.nextInt(10) + 1;
+            option2 = correctAnswer - rdn.nextInt(5) - 1;
+            option3 = correctAnswer + rdn.nextInt(15) + 1;
+        }
+        
+        //En caso de que los numeros generados sean negativos, se les multiplicará por -1
+        if (option1< 0){
+            option1 = option1 * (-1);
+        }
+        if (option2< 0){
+            option2 = option2 * (-1);
+        }
+        if (option3< 0){
+            option3 = option3 * (-1);
+        }
+        
+
+        //Asigno los valores generados a pociciones de un vector 
+        questionType4[0] = question;
+        questionType4[1] = String.valueOf(correctAnswer) + "π m^3";
+        questionType4[2] = String.valueOf(option1)+ "π m^3";
+        questionType4[3] = String.valueOf(option2)+ "π m^3";
+        questionType4[4] = String.valueOf(option3)+ "π m^3";
+        
+        //retorno el vector
+        return questionType4;
     }
     
     // Fin Metodos
@@ -282,11 +366,13 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         Iniciar = new javax.swing.JButton();
-        ecuacion = new javax.swing.JLabel();
+        cilindro = new javax.swing.JLabel();
         opcion1 = new javax.swing.JLabel();
         opcion2 = new javax.swing.JLabel();
         opcion3 = new javax.swing.JLabel();
         opcion4 = new javax.swing.JLabel();
+        contador = new javax.swing.JLabel();
+        prueba = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -297,7 +383,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        ecuacion.setText("jLabel1");
+        cilindro.setText("jLabel1");
 
         opcion1.setText("jLabel1");
 
@@ -306,6 +392,10 @@ public class GUI extends javax.swing.JFrame {
         opcion3.setText("jLabel3");
 
         opcion4.setText("jLabel4");
+
+        contador.setText("jLabel1");
+
+        prueba.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -318,25 +408,45 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opcion4)
-                    .addComponent(opcion3)
-                    .addComponent(opcion2)
-                    .addComponent(opcion1)
-                    .addComponent(ecuacion))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(opcion4)
+                            .addComponent(opcion3)
+                            .addComponent(opcion1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cilindro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(contador)
+                        .addGap(47, 47, 47))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(opcion2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(prueba)
+                        .addGap(95, 95, 95))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(Iniciar)
-                .addGap(51, 51, 51)
-                .addComponent(ecuacion)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(cilindro))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(contador)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(opcion1)
                 .addGap(18, 18, 18)
-                .addComponent(opcion2)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(opcion2)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(prueba)
+                        .addGap(6, 6, 6)))
                 .addComponent(opcion3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opcion4)
@@ -347,12 +457,8 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarActionPerformed
-        questionType3 = preguntatipo3();
-        ecuacion.setText(questionType3[0]);
-        opcion1.setText(questionType3[1]);
-        opcion2.setText(questionType3[2]);
-        opcion3.setText(questionType3[3]);
-        opcion4.setText(questionType3[4]);
+
+        
     }//GEN-LAST:event_IniciarActionPerformed
 
     /**
@@ -392,10 +498,12 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Iniciar;
-    private javax.swing.JLabel ecuacion;
+    private javax.swing.JLabel cilindro;
+    private javax.swing.JLabel contador;
     private javax.swing.JLabel opcion1;
     private javax.swing.JLabel opcion2;
     private javax.swing.JLabel opcion3;
     private javax.swing.JLabel opcion4;
+    private javax.swing.JLabel prueba;
     // End of variables declaration//GEN-END:variables
 }
