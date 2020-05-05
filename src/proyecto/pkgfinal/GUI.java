@@ -18,8 +18,7 @@ import javax.swing.JOptionPane;
 public class GUI extends javax.swing.JFrame {
 
     public Random rdn = new Random();
-    public String[] questionType4 = new String[5];
-    public int count = 0 ;
+    public String[] questionType2 = new String[5];
 
 
     /**
@@ -34,16 +33,29 @@ public class GUI extends javax.swing.JFrame {
     
     
     
-    
-    
-    
+    /*
+    Tipos de pregunta:
 
-    
-    
+    -Tipo 1-
+    Cual de estos valores esta en este rango?
+
+    Tipo 2
+    Cual es el valor de la hipotenusa?
+
+    Tipo 3
+    Cuales son las dos ceros reales de la ecuacion cuadratica?
+
+    Tipo 4
+    Cual es el volumen de este cilindro?
+
+    Tipo 5
+
+
+    Tipo 6
+    */
     
     // Inicio Metodos
         
-    //Genera un caso aleartorio de la pregunta tipo 1
     public String[] preguntaTipo1(){
         String[] questionType1 = new String[5];
         String range = "";
@@ -58,6 +70,11 @@ public class GUI extends javax.swing.JFrame {
         String mensaje = "";
         
         
+        //Compruebo que los limites generados aleatoriamente no sean iguales, en caso de serlo
+        //añado 50 a la variable upperLimit
+        if (lowerLimit==upperLimit){
+            upperLimit = upperLimit + 50;
+        }
         //Compruebo que el limitie superior sea mayor que el limite inferior, encaso de uqe nosea asi
         //intercambio los valores de estos.
         if (lowerLimit>upperLimit){
@@ -246,8 +263,74 @@ public class GUI extends javax.swing.JFrame {
         return questionType1;
     }
     
+    public String[] preguntaTipo2(){
+        
+        String[] questionType2 = new String[5];
+        int a = rdn.nextInt(15) + 1;
+        int b = rdn.nextInt(15) + 1;
+        int combination = rdn.nextInt(4);
+        double correctAnswer = 0;
+        int guide = 0;
+        double option1 = 0;
+        double option2 = 0;
+        double option3 = 0;
+        
+        if (Math.sqrt(Math.pow(a, 2)+ Math.pow(b, 2))%1 == 0){
+            correctAnswer =Math.sqrt(Math.pow(a, 2)+ Math.pow(b, 2));
+            guide = 1;
+        }
+        else{
+            correctAnswer =Math.pow(a, 2)+ Math.pow(b, 2);
+            guide = 2;
+        }
+        
+        if (combination == 0 )
+        {
+           option1 = correctAnswer + rdn.nextInt(20) + 6;
+           option2 = correctAnswer + rdn.nextInt(5) + 1;
+           option3 = correctAnswer + rdn.nextInt(50) + 26;
+        }
+
+        if (combination == 1 )
+        {
+            option1 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 2;
+            option2 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 1 ;
+            option3 = correctAnswer - rdn.nextInt((int)correctAnswer -4) - 3;
+        }
+
+        if (combination == 2 )
+        {
+            option1 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 2;
+            option2 = correctAnswer + rdn.nextInt(5) + 1;
+            option3 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 1;
+        }
+
+        if (combination == 3 )
+        {
+            option1 = correctAnswer + rdn.nextInt(20) + 6;
+            option2 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 1;
+            option3 = correctAnswer + rdn.nextInt(50) + 26;
+        }
+        
+        questionType2[0]= "a= " + a + ", b= " + b;
+        if(guide == 1){
+            questionType2[1] =String.valueOf((int)correctAnswer);
+            questionType2[2] =String.valueOf((int)option1) ;
+            questionType2[3] =String.valueOf((int)option2) ;
+            questionType2[4] =String.valueOf((int)option3) ;
+        }
+        else if(guide == 2){
+            questionType2[1] ="√" + String.valueOf((int)correctAnswer);
+            questionType2[2] ="√" + String.valueOf((int)option1) ;
+            questionType2[3] ="√" + String.valueOf((int)option2) ;
+            questionType2[4] ="√" + String.valueOf((int)option3) ;
+        }
+
+        return questionType2;
+    }
     
-    public String[] preguntatipo3(){
+
+    public String[] preguntaTipo3(){
         
         //Declaro las variables necesacria para generar y retornar una pregunta tipo 3
         String[] questionType3 = new String[5];
@@ -288,7 +371,7 @@ public class GUI extends javax.swing.JFrame {
             return null;
         }
     }
-    
+
     public String[] preguntaTipo4(){
         
         //Declaro las variables necesacria para generar y retornar una pregunta tipo 4
@@ -366,7 +449,7 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         Iniciar = new javax.swing.JButton();
-        cilindro = new javax.swing.JLabel();
+        lados = new javax.swing.JLabel();
         opcion1 = new javax.swing.JLabel();
         opcion2 = new javax.swing.JLabel();
         opcion3 = new javax.swing.JLabel();
@@ -383,7 +466,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        cilindro.setText("jLabel1");
+        lados.setText("jLabel1");
 
         opcion1.setText("jLabel1");
 
@@ -415,7 +498,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(opcion1))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cilindro)
+                        .addComponent(lados)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(contador)
                         .addGap(47, 47, 47))
@@ -433,7 +516,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(cilindro))
+                        .addComponent(lados))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(contador)))
@@ -457,8 +540,14 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarActionPerformed
-
+        questionType2 = preguntaTipo2();
         
+        lados.setText(questionType2[0]);
+        opcion1.setText(questionType2[1]);
+        opcion2.setText(questionType2[2]);
+        opcion3.setText(questionType2[3]);
+        opcion4.setText(questionType2[4]);
+
     }//GEN-LAST:event_IniciarActionPerformed
 
     /**
@@ -498,8 +587,8 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Iniciar;
-    private javax.swing.JLabel cilindro;
     private javax.swing.JLabel contador;
+    private javax.swing.JLabel lados;
     private javax.swing.JLabel opcion1;
     private javax.swing.JLabel opcion2;
     private javax.swing.JLabel opcion3;
