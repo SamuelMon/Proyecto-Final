@@ -37,21 +37,22 @@ public class GUI extends javax.swing.JFrame {
     Tipos de pregunta:
 
     -Tipo 1-
-    Cual de estos valores esta en este rango?
+    Cual de los siguinetes valores esta en este "inserte rango" rango?
 
     Tipo 2
-    Cual es el valor de la hipotenusa?
+    Cual de los siguientes es el valor de la hipotenusa del triangulo con catetos a= "Inserte a" y b= "Inserte b"?
 
     Tipo 3
-    Cuales son las dos ceros reales de la ecuacion cuadratica?
+    Elija la opcion que contenga las dos ceros reales de la siguiente ecuacion cuadratica: "Inserte la ecuación" ?
 
     Tipo 4
-    Cual es el volumen de este cilindro?
+    Cual de los siguientes es el volumen del cilindro con r="Inserte r" y h="Inserte h"?
 
     Tipo 5
-
+    Cual de los siguientes es el Volumen de la caja con lados a="Inserte a", b="Inserte b" y c="Inserte c"?
 
     Tipo 6
+    
     */
     
     // Inicio Metodos
@@ -121,7 +122,7 @@ public class GUI extends javax.swing.JFrame {
                 if (combination2 == 3 )
                 {
                     option1 = upperLimit + rdn.nextInt(20) + 6;
-                    option2 = lowerLimit - rdn.nextInt(5);
+                    option2 = lowerLimit - rdn.nextInt(5) - 1;
                     option3 = upperLimit + rdn.nextInt(50) + 26;
                 }  
                 break;
@@ -152,16 +153,16 @@ public class GUI extends javax.swing.JFrame {
 
                     if (combination2 == 2 )
                     {
-                        option1 = lowerLimit - rdn.nextInt(20) - 5;
+                        option1 = lowerLimit - rdn.nextInt(20) + 1;
                         option2 = upperLimit + rdn.nextInt(5);
-                        option3 = lowerLimit - rdn.nextInt(50) - 25;
+                        option3 = lowerLimit - rdn.nextInt(50) - 21;
                     }
 
                     if (combination2 == 3 )
                     {
-                        option1 = upperLimit + rdn.nextInt(20) + 5;
+                        option1 = upperLimit + rdn.nextInt(20);
                         option2 = lowerLimit - rdn.nextInt(5) - 1;
-                        option3 = upperLimit + rdn.nextInt(50) + 25;
+                        option3 = upperLimit + rdn.nextInt(50) + 20;
                     }  
                     break;
                 }
@@ -177,30 +178,30 @@ public class GUI extends javax.swing.JFrame {
                 // El caso elegido dependera de una variable que tiene un valor random entre 0 y 3.
                 if (combination2 == 0 )
                 {
-                    option1 = upperLimit + rdn.nextInt(20) + 5;
-                    option2 = upperLimit + rdn.nextInt(5);
-                    option3 = upperLimit + rdn.nextInt(50) + 25;
+                    option1 = upperLimit + rdn.nextInt(20) + 6;
+                    option2 = upperLimit + rdn.nextInt(5) + 1;
+                    option3 = upperLimit + rdn.nextInt(50) + 26;
                 }
 
                 if (combination2 == 1 )
                 {
-                    option1 = lowerLimit - rdn.nextInt(20) - 6;
+                    option1 = lowerLimit - rdn.nextInt(20) - 5;
                     option2 = lowerLimit - rdn.nextInt(5);
-                    option3 = lowerLimit - rdn.nextInt(50) - 26;
+                    option3 = lowerLimit - rdn.nextInt(50) - 25;
                 }
 
                 if (combination2 == 2 )
                 {
-                    option1 = lowerLimit - rdn.nextInt(20) - 6;
-                    option2 = upperLimit + rdn.nextInt(5);
-                    option3 = lowerLimit - rdn.nextInt(50) - 26;
+                    option1 = lowerLimit - rdn.nextInt(20);
+                    option2 = upperLimit + rdn.nextInt(5) + 1;
+                    option3 = lowerLimit - rdn.nextInt(50) - 20;
                 }
 
                 if (combination2 == 3 )
                 {
-                    option1 = upperLimit + rdn.nextInt(20) + 6;
+                    option1 = upperLimit + rdn.nextInt(20) + 5;
                     option2 = lowerLimit - rdn.nextInt(5);
-                    option3 = upperLimit + rdn.nextInt(50) + 26;
+                    option3 = upperLimit + rdn.nextInt(50) + 25;
                 }
                 break;
             }
@@ -224,23 +225,23 @@ public class GUI extends javax.swing.JFrame {
 
                 if (combination2 == 1 )
                 {
-                    option1 = lowerLimit - rdn.nextInt(20) - 6;
+                    option1 = lowerLimit - rdn.nextInt(20) - 5;
                     option2 = lowerLimit - rdn.nextInt(5);
-                    option3 = lowerLimit - rdn.nextInt(50) - 26;
+                    option3 = lowerLimit - rdn.nextInt(50) - 25;
                 }
 
                 if (combination2 == 2 )
                 {
-                    option1 = lowerLimit - rdn.nextInt(20) - 6;
+                    option1 = lowerLimit - rdn.nextInt(20);
                     option2 = upperLimit + rdn.nextInt(5);
-                    option3 = lowerLimit - rdn.nextInt(50) - 26;
+                    option3 = lowerLimit - rdn.nextInt(50) - 20;
                 }
 
                 if (combination2 == 3 )
                 {
-                    option1 = upperLimit + rdn.nextInt(20) + 6;
+                    option1 = upperLimit + rdn.nextInt(20);
                     option2 = lowerLimit - rdn.nextInt(5);
-                    option3 = upperLimit + rdn.nextInt(50) + 26;
+                    option3 = upperLimit + rdn.nextInt(50) + 20;
                 }
                 break;    
             }
@@ -266,7 +267,7 @@ public class GUI extends javax.swing.JFrame {
     public String[] preguntaTipo2(){
         
         String[] questionType2 = new String[5];
-        int a = rdn.nextInt(15) + 1;
+        int a = rdn.nextInt(15) + 3;
         int b = rdn.nextInt(15) + 1;
         int combination = rdn.nextInt(4);
         double correctAnswer = 0;
@@ -293,22 +294,22 @@ public class GUI extends javax.swing.JFrame {
 
         if (combination == 1 )
         {
-            option1 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 2;
-            option2 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 1 ;
-            option3 = correctAnswer - rdn.nextInt((int)correctAnswer -4) - 3;
+            option1 = correctAnswer - rdn.nextInt((int)(correctAnswer/3));
+            option2 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+            option3 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
         }
 
         if (combination == 2 )
         {
-            option1 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 2;
+            option1 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) ;
             option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 1;
+            option3 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
         }
 
         if (combination == 3 )
         {
             option1 = correctAnswer + rdn.nextInt(20) + 6;
-            option2 = correctAnswer - rdn.nextInt((int)correctAnswer - 4) - 1;
+            option2 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
             option3 = correctAnswer + rdn.nextInt(50) + 26;
         }
         
