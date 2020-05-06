@@ -383,8 +383,8 @@ public class GUI extends javax.swing.JFrame {
         
         //Declaro las variables necesacria para generar y retornar una pregunta tipo 4
         String[] questionType4 = new String[5];
-        int radio = rdn.nextInt(13)+1;
-        int height = rdn.nextInt(20)+1;
+        int radio = rdn.nextInt(10)+1;
+        int height = rdn.nextInt(15)+1;
         int combination = rdn.nextInt(4);
         String question ="Cual de los siguientes es el volumen del cilindro con r= " + radio + " m" + ", h= " + height + "m";
         int correctAnswer =(int) (Math.pow(radio,2) * height);
@@ -518,8 +518,6 @@ public class GUI extends javax.swing.JFrame {
         opcion2 = new javax.swing.JLabel();
         opcion3 = new javax.swing.JLabel();
         opcion4 = new javax.swing.JLabel();
-        contador = new javax.swing.JLabel();
-        prueba = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -540,10 +538,6 @@ public class GUI extends javax.swing.JFrame {
 
         opcion4.setText("jLabel4");
 
-        contador.setText("jLabel1");
-
-        prueba.setText("jLabel1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -563,37 +557,23 @@ public class GUI extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(mensaje)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(contador)
-                        .addGap(47, 47, 47))
+                        .addGap(47, 317, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(opcion2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(prueba)
-                        .addGap(95, 95, 95))))
+                        .addGap(95, 317, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(Iniciar)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(mensaje))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(contador)))
+                .addGap(51, 51, 51)
+                .addComponent(mensaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(opcion1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(opcion2)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(prueba)
-                        .addGap(6, 6, 6)))
+                .addComponent(opcion2)
+                .addGap(18, 18, 18)
                 .addComponent(opcion3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opcion4)
@@ -651,12 +631,10 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Iniciar;
-    private javax.swing.JLabel contador;
     private javax.swing.JLabel mensaje;
     private javax.swing.JLabel opcion1;
     private javax.swing.JLabel opcion2;
     private javax.swing.JLabel opcion3;
     private javax.swing.JLabel opcion4;
-    private javax.swing.JLabel prueba;
     // End of variables declaration//GEN-END:variables
 }
