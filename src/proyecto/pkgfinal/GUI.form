@@ -40,7 +40,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lados" min="-2" max="-2" attributes="0"/>
+                      <Component id="mensaje" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="contador" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="lados" min="-2" max="-2" attributes="0"/>
+                      <Component id="mensaje" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -100,7 +100,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IniciarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lados">
+    <Component class="javax.swing.JLabel" name="mensaje">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
