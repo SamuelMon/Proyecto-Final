@@ -278,12 +278,6 @@ public class Board extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Incorrecto");
             points = points - 50;
         }
-        if (points >= 0) {
-            puntaje.setText(String.valueOf("Puntaje: " + points));
-        } else {
-            points = 0;
-            puntaje.setText(String.valueOf("Puntaje: " + points));
-        }
         if (totalPos - 1 == actualPos) {
             state = false;
             JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>Puntaje: " + points);
@@ -297,6 +291,7 @@ public class Board extends javax.swing.JFrame {
             pregunta.setVisible(false);
             optionList.clear();
         }
+        answers.clearSelection();
     }//GEN-LAST:event_responderActionPerformed
 
     public void cronometro() {
