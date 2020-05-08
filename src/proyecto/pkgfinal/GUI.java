@@ -93,7 +93,7 @@ public class GUI extends javax.swing.JFrame {
             {
                 //Asigno a la variable correctAnswer un valor que se encuentre en el intervalo generado
                 correctAnswer = lowerLimit + rdn.nextInt(upperLimit - lowerLimit + 1);
-                range = "Cual de los siguinetes valores esta dentro de este rango: " +  "[ " + lowerLimit + " , " + upperLimit + " ] .";
+                range = "<html><p>Cual de los siguinetes valores esta dentro de este rango: <br/>" +  "[ " + lowerLimit + " , " + upperLimit + " ] .</p></html>";
                 
                 // Estos if sirven para tener en cuente la posibilidades a la hora de mostrar posibles 
                 // respuestas.
@@ -132,7 +132,7 @@ public class GUI extends javax.swing.JFrame {
                 {
                     //Asigno a la variable correctAnswer un valor que se encuentre en el intervalo generado
                     correctAnswer = lowerLimit + rdn.nextInt(upperLimit - lowerLimit );
-                    range = "Cual de los siguinetes valores esta dentro de este rango: " + "[ " + lowerLimit + " , " + upperLimit + " ) .";
+                    range = "<html><p>Cual de los siguientes valores esta dentro de este rango: <br/>" + "[ " + lowerLimit + " , " + upperLimit + " ) .</p></html>";
 
                     // Estos if sirven para tener en cuente la posibilidades a la hora de mostrar posibles 
                     // respuestas.
@@ -171,7 +171,7 @@ public class GUI extends javax.swing.JFrame {
             {
                 //Asigno a la variable correctAnswer un valor que se encuentre en el intervalo generado
                 correctAnswer = 1 + lowerLimit + rdn.nextInt(upperLimit - lowerLimit );
-                range ="Cual de los siguinetes valores esta dentro de este rango: " + "( " + lowerLimit + " , " + upperLimit + " ] .";
+                range ="<html><p>Cual de los siguinetes valores esta dentro de este rango: <br/>" + "( " + lowerLimit + " , " + upperLimit + " ] .</p></html>";
                 
                 // Estos if sirven para tener en cuente la posibilidades a la hora de mostrar posibles 
                 // respuestas.
@@ -210,7 +210,7 @@ public class GUI extends javax.swing.JFrame {
             {
                 //Asigno a la variable correctAnswer un valor que se encuentre en el intervalo generado
                 correctAnswer = 1+ lowerLimit + rdn.nextInt(upperLimit - lowerLimit - 1);
-                range ="Cual de los siguinetes valores esta dentro de este rango: " + "( " + lowerLimit + " , " + upperLimit + " ) .";
+                range ="<html><p>Cual de los siguinetes valores esta dentro de este rango: <br/>" + "( " + lowerLimit + " , " + upperLimit + " ) .</p></html>";
                 
                 // Estos if sirven para tener en cuente la posibilidades a la hora de mostrar posibles 
                 // respuestas.
@@ -313,7 +313,7 @@ public class GUI extends javax.swing.JFrame {
             option3 = correctAnswer + rdn.nextInt(50) + 26;
         }
         
-        questionType2[0]="Cual de los siguientes es el valor de la hipotenusa del triangulo con catetos a= " + a + ", b= " + b;
+        questionType2[0]="<html><p>Cual de los siguientes es el valor de la hipotenusa del triangulo con catetos <br/>a= " + a + ", b= " + b + "</p></html>";
         if(guide == 1){
             questionType2[1] =String.valueOf((int)correctAnswer);
             questionType2[2] =String.valueOf((int)option1) ;
@@ -359,7 +359,7 @@ public class GUI extends javax.swing.JFrame {
             //Agrego el mensaje que será mostrado al usuario en la primer posicion de 
             //cada fila
             for (int i = 0; i < 50; i++) {
-                equationMatrix[i][0] = "Elija la opcion que contenga las dos ceros reales de la siguiente ecuacion cuadratica: " + equationMatrix[i][0];
+                equationMatrix[i][0] = "<html><p>Elija la opcion que contenga las dos ceros reales de la siguiente ecuacion cuadratica: " + equationMatrix[i][0] + "</p></html>";
             }
             
             //Con este ciclo asigno a un vector de tipo string una fila de la matriz 
@@ -386,7 +386,7 @@ public class GUI extends javax.swing.JFrame {
         int radio = rdn.nextInt(10)+1;
         int height = rdn.nextInt(15)+1;
         int combination = rdn.nextInt(4);
-        String question ="Cual de los siguientes es el volumen del cilindro con r= " + radio + " m" + ", h= " + height + "m";
+        String question ="<html><p>Cual de los siguientes es el volumen del cilindro con:<br/> r= " + radio + " m" + ", h= " + height + "m</p></html>";
         int correctAnswer =(int) (Math.pow(radio,2) * height);
         int option1 = 0;
         int option2 = 0;
@@ -452,7 +452,7 @@ public class GUI extends javax.swing.JFrame {
         int a = rdn.nextInt(10) +1;
         int b = rdn.nextInt(10) +1;
         int c = rdn.nextInt(10) +1;
-        String question = "Cual de los siguientes es el Volumen de la caja con lados a= " + a + " m"+ ", b= " + b + " m "+ "y c= " + c + " m.";
+        String question = "<html><p>Cual de los siguientes es el Volumen de la caja con lados:<br/>a= " + a + " m"+ ", b= " + b + " m "+ "y c= " + c + " m.</p></html>";
         int combination = rdn.nextInt(4);
         int correctAnswer = a * b * c;
         int option1 = 0;

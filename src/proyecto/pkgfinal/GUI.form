@@ -31,23 +31,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="opcion4" min="-2" max="-2" attributes="0"/>
-                          <Component id="opcion3" min="-2" max="-2" attributes="0"/>
-                          <Component id="opcion1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="mensaje" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="47" pref="317" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="opcion2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="95" pref="317" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="opcion4" min="-2" max="-2" attributes="0"/>
+                  <Component id="opcion3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opcion1" min="-2" max="-2" attributes="0"/>
+                  <Component id="mensaje" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="opcion2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
