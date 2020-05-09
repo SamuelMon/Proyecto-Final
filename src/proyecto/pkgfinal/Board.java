@@ -6,8 +6,10 @@
 package proyecto.pkgfinal;
 
 import java.awt.Color;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -18,18 +20,13 @@ import javax.swing.JOptionPane;
 public class Board extends javax.swing.JFrame {
 
     public ArrayList<JLabel> lista = new ArrayList<>();
-    public int totalPos;
-    public int actualPos = 0;
+    public int totalPos, seg, min, hor, segTotal, actualPos = 0, points = 0, actualTime, tipoPregunta;
     public String[] question = new String[5];
     public GUI type = new GUI();
-    public int points = 0;
-    public int min;
-    public int seg;
-    public int hor;
-    public int segTotal;
-    public boolean state = true;
+    public boolean state = true, show = false, change = false;
     public ArrayList<Integer> optionList = new ArrayList<>();
     public Random rdm = new Random();
+    public ImageIcon imageHelp, imageButton;
 
     /**
      * Creates new form Board
@@ -37,6 +34,8 @@ public class Board extends javax.swing.JFrame {
     public Board() {
         initComponents();
         puntaje.setText("Puntaje: " + String.valueOf(points));
+        imageButton = new ImageIcon("src/imagenes/dado1.png");
+        nxtPos.setIcon(imageButton);
         puntaje.setVisible(false);
         time.setVisible(false);
         nxtPos.setVisible(false);
@@ -47,7 +46,7 @@ public class Board extends javax.swing.JFrame {
         option4.setVisible(false);
         pregunta.setVisible(false);
         help.setVisible(false);
-        helpButton.setVisible(false);
+        hint.setVisible(false);
     }
 
     /**
@@ -74,7 +73,7 @@ public class Board extends javax.swing.JFrame {
         pregunta = new javax.swing.JLabel();
         time = new javax.swing.JLabel();
         help = new javax.swing.JLabel();
-        helpButton = new javax.swing.JButton();
+        hint = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +87,6 @@ public class Board extends javax.swing.JFrame {
             }
         });
 
-        nxtPos.setText("Dado xD");
         nxtPos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nxtPosActionPerformed(evt);
@@ -120,9 +118,12 @@ public class Board extends javax.swing.JFrame {
 
         time.setText("00:00:00");
 
-        help.setText("jLabel1");
-
-        helpButton.setText("Ayuda");
+        hint.setText("?");
+        hint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hintActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,56 +135,59 @@ public class Board extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(create)
                 .addGap(34, 34, 34)
-                .addComponent(nxtPos)
+                .addComponent(nxtPos, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(option2)
-                                    .addComponent(option3)
-                                    .addComponent(option4)
-                                    .addComponent(pregunta)
-                                    .addComponent(option1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(help)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(helpButton)))
-                                .addContainerGap(67, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(puntaje)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(time)
-                                .addGap(15, 15, 15))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(responder)
-                        .addGap(55, 55, 55))))
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(option3)
+                                    .addComponent(option4)
+                                    .addComponent(option2)
+                                    .addComponent(option1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addComponent(responder)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hint)))
+                                .addGap(0, 14, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(pregunta)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(help)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(create)
-                    .addComponent(numTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nxtPos)
-                    .addComponent(puntaje)
-                    .addComponent(time))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(create)
+                        .addComponent(numTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(puntaje)
+                        .addComponent(time))
+                    .addComponent(nxtPos, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pregunta)
+                        .addGap(2, 2, 2)
+                        .addComponent(help)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(help)
-                            .addComponent(helpButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(option1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(option2)
@@ -192,9 +196,12 @@ public class Board extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(option4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(responder))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(responder)
+                            .addComponent(hint))
+                        .addGap(0, 130, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         pack();
@@ -210,6 +217,7 @@ public class Board extends javax.swing.JFrame {
             JLabel label = new JLabel(String.valueOf(i + 1));
             label.setBackground(Color.yellow);
             label.setOpaque(true);
+            label.setHorizontalAlignment(0);
             lista.add(label);
             panel.add(label);
         }
@@ -229,23 +237,61 @@ public class Board extends javax.swing.JFrame {
     private void nxtPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nxtPosActionPerformed
         // TODO add your handling code here:
         int adv = rdm.nextInt(6) + 1;
+        switch (adv) {
+            case 1:
+                imageButton = new ImageIcon("src/imagenes/dado1.png");
+                nxtPos.setIcon(imageButton);
+                break;
+            case 2:
+                imageButton = new ImageIcon("src/imagenes/dado2.png");
+                nxtPos.setIcon(imageButton);
+                break;
+            case 3:
+                imageButton = new ImageIcon("src/imagenes/dado3.png");
+                nxtPos.setIcon(imageButton);
+                break;
+            case 4:
+                imageButton = new ImageIcon("src/imagenes/dado4.png");
+                nxtPos.setIcon(imageButton);
+                break;
+            case 5:
+                imageButton = new ImageIcon("src/imagenes/dado5.png");
+                nxtPos.setIcon(imageButton);
+                break;
+            case 6:
+                imageButton = new ImageIcon("src/imagenes/dado6.png");
+                nxtPos.setIcon(imageButton);
+                break;
+        }
         if (actualPos + adv < totalPos) {
             lista.get(actualPos).setBackground(Color.yellow);
             actualPos = actualPos + adv;
             lista.get(actualPos).setBackground(Color.red);
             String pos = String.valueOf(actualPos);
             if (pos.endsWith("0") || pos.endsWith("5")) {
+                tipoPregunta = 1;
                 question = type.preguntaTipo1();
             } else if (pos.endsWith("1") || pos.endsWith("6")) {
                 question = type.preguntaTipo2();
+                tipoPregunta = 2;
+                imageHelp = new ImageIcon("src/imagenes/teoremaPitagoras.jpg");
+                help.setIcon(imageHelp);
             } else if (pos.endsWith("2") || pos.endsWith("7")) {
                 question = type.preguntaTipo3();
+                tipoPregunta = 3;
+                imageHelp = new ImageIcon("src/imagenes/formulaCuadratica.jpg");
+                help.setIcon(imageHelp);
             } else if (pos.endsWith("3") || pos.endsWith("8")) {
                 question = type.preguntaTipo4();
+                tipoPregunta = 4;
+                imageHelp = new ImageIcon("src/imagenes/volumenCilindro.jpg");
+                help.setIcon(imageHelp);
             } else if (pos.endsWith("4") || pos.endsWith("9")) {
                 question = type.preguntaTipo5();
+                tipoPregunta = 5;
+                imageHelp = new ImageIcon("src/imagenes/volumenCaja.jpg");
+                help.setIcon(imageHelp);
             }
-            nxtPos.setText("Sacó " + adv);
             pregunta.setText(question[0]);
             asignarRespuestas();
             nxtPos.setEnabled(false);
@@ -255,8 +301,9 @@ public class Board extends javax.swing.JFrame {
             option3.setVisible(true);
             option4.setVisible(true);
             pregunta.setVisible(true);
+            showHelp();
         } else {
-            JOptionPane.showMessageDialog(null, "Vuelva a lanzar, el número sacado se sale del tablero");
+            JOptionPane.showMessageDialog(null, "El número sacado se sale del tablero");
         }
     }//GEN-LAST:event_nxtPosActionPerformed
 
@@ -278,6 +325,7 @@ public class Board extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Incorrecto");
             points = points - 50;
         }
+        puntaje.setText("Puntaje: " + points);
         if (totalPos - 1 == actualPos) {
             state = false;
             JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>Puntaje: " + points);
@@ -289,10 +337,18 @@ public class Board extends javax.swing.JFrame {
             option3.setVisible(false);
             option4.setVisible(false);
             pregunta.setVisible(false);
+            help.setVisible(false);
+            hint.setVisible(false);
             optionList.clear();
         }
         answers.clearSelection();
     }//GEN-LAST:event_responderActionPerformed
+
+    private void hintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hintActionPerformed
+        // TODO add your handling code here:
+        change = !change;
+        help.setVisible(change);
+    }//GEN-LAST:event_hintActionPerformed
 
     public void cronometro() {
         state = true;
@@ -325,10 +381,43 @@ public class Board extends javax.swing.JFrame {
         hilo.start();
     }
 
+    public void showHelp() {
+        show = false;
+        actualTime = 0;
+        Thread hilo = new Thread() {
+            public void run() {
+                for (;;) {
+                    if (show == false) {
+                        try {
+                            sleep(1000);
+                            actualTime++;
+                            if (actualTime >= 7) {
+                                if (tipoPregunta != 1){
+                                show = true;
+                                change = false;
+                                hint.setVisible(show);
+                                } else{
+                                    show = true;
+                                }
+                            } else {
+                                hint.setVisible(show);
+                            }
+                        } catch (InterruptedException e) {
+
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+        };
+        hilo.start();
+    }
+
     public void asignarRespuestas() {
-        for (int i = 0; optionList.size()<4; i++){
-            int opt = rdm.nextInt(4)+1;
-            if (!optionList.contains(opt)){
+        for (int i = 0; optionList.size() < 4; i++) {
+            int opt = rdm.nextInt(4) + 1;
+            if (!optionList.contains(opt)) {
                 optionList.add(opt);
             }
         }
@@ -377,7 +466,7 @@ public class Board extends javax.swing.JFrame {
     private javax.swing.ButtonGroup answers;
     private javax.swing.JButton create;
     private javax.swing.JLabel help;
-    private javax.swing.JButton helpButton;
+    private javax.swing.JButton hint;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField numTxt;
     private javax.swing.JButton nxtPos;

@@ -33,7 +33,7 @@
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="create" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="nxtPos" min="-2" max="-2" attributes="0"/>
+              <Component id="nxtPos" min="-2" pref="43" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -41,35 +41,40 @@
               <Component id="jScrollPane1" min="-2" pref="342" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="option2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="option3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="option4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="pregunta" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="option1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="help" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="helpButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace pref="67" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="puntaje" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="time" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="option3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="option4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="option2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="option1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                      <Component id="responder" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="hint" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="pregunta" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="responder" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                      <Component id="help" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -79,23 +84,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="create" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="numTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nxtPos" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="puntaje" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="time" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="create" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="numTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="puntaje" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="time" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="nxtPos" min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="pregunta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="help" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="help" min="-2" max="-2" attributes="0"/>
-                          <Component id="helpButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="option1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="option2" min="-2" max="-2" attributes="0"/>
@@ -104,11 +108,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="option4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="responder" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="responder" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="hint" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="130" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" min="-2" pref="232" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -138,9 +146,6 @@
     <Component class="javax.swing.JTextField" name="numTxt">
     </Component>
     <Component class="javax.swing.JButton" name="nxtPos">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Dado xD"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nxtPosActionPerformed"/>
       </Events>
@@ -201,14 +206,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="help">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
-      </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="helpButton">
+    <Component class="javax.swing.JButton" name="hint">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ayuda"/>
+        <Property name="text" type="java.lang.String" value="?"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hintActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
