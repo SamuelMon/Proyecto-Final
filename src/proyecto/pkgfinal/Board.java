@@ -23,7 +23,7 @@ public class Board extends javax.swing.JFrame {
     public int totalPos, seg, min, hor, segTotal, actualPos = 0, points = 0, points2 = 0, actualTime, tipoPregunta, player2Pos = 0, adv;
     public String[] question = new String[5];
     public GUI type = new GUI();
-    public boolean state = true, show = false, change = false, multi = false, player2 = false, turno = false, sumaPuntos = false;
+    public boolean state = true, show = false, change = false, player2 = false, turno = false;
     public ArrayList<Integer> optionList = new ArrayList<>();
     public Random rdm = new Random();
     public ImageIcon imageHelp, imageButton;
@@ -140,7 +140,7 @@ public class Board extends javax.swing.JFrame {
 
         puntaje2.setText("Puntaje 2");
 
-        playerTurn.setText("Turno");
+        playerTurn.setText("Turno: J1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -342,20 +342,28 @@ public class Board extends javax.swing.JFrame {
                 if (respuesta.equals("Correcto")) {
                     points = points + 100;
                 } else {
-                    points = points - 50;
+                    points = points - 150;
                     lista.get(actualPos).setBackground(Color.yellow);
-                    actualPos = actualPos - adv;
+                    actualPos = (int) (actualPos - Math.ceil(adv/2));
                     lista.get(actualPos).setBackground(Color.red);
+                    lista.get(player2Pos).setBackground(Color.blue);
                 }
+                playerTurn.setText("Turno: J2");
             } else {
                 if (respuesta.equals("Correcto")) {
                     points2 = points2 + 100;
                 } else {
-                    points2 = points2 - 50;
+                    points2 = points2 - 150;
                     lista.get(player2Pos).setBackground(Color.yellow);
-                    player2Pos = player2Pos - adv;
+                    player2Pos = (int) Math.ceil(player2Pos - adv/2);
                     lista.get(player2Pos).setBackground(Color.blue);
+                    lista.get(actualPos).setBackground(Color.red);
+                    
                 }
+                playerTurn.setText("Turno: J2");
+            }
+            if (actualPos == player2Pos) {
+                lista.get(player2Pos).setBackground(Color.magenta);
             }
             puntaje.setText("Puntaje J1: " + points);
             puntaje2.setText("Puntaje J2: " + points2);
@@ -363,15 +371,16 @@ public class Board extends javax.swing.JFrame {
             if (respuesta.equals("Correcto")) {
                 points = points + 100;
             } else {
-                points = points - 50;
+                points = points - 150;
                 lista.get(actualPos).setBackground(Color.yellow);
-                actualPos = actualPos - adv;
+                actualPos = (int) (actualPos - Math.ceil(adv/2));
                 lista.get(actualPos).setBackground(Color.red);
             }
             puntaje.setText("Puntaje: " + points);
         }
 
         if (totalPos - 1 == actualPos || totalPos - 1 == player2Pos) {
+            state = false;
             if (player2 == true) {
                 if (totalPos - 1 == actualPos) {
                     JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>El jugador 1 gana");
@@ -381,7 +390,6 @@ public class Board extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>Puntaje: " + points);
             }
-            state = false;
         } else {
             rollDice.setEnabled(true);
         }
@@ -415,6 +423,7 @@ public class Board extends javax.swing.JFrame {
         lista.get(actualPos).setBackground(Color.magenta);
         puntaje.setVisible(true);
         puntaje2.setVisible(true);
+        playerTurn.setVisible(true);
     }//GEN-LAST:event_multiplayerActionPerformed
 
     public void createBoard(int boardSquares) {

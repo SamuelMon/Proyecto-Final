@@ -262,7 +262,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="playerTurn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Turno"/>
+        <Property name="text" type="java.lang.String" value="Turno: J1"/>
       </Properties>
     </Component>
   </SubComponents>
