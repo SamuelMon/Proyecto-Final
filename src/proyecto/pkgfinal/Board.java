@@ -22,7 +22,7 @@ public class Board extends javax.swing.JFrame {
     public ArrayList<JLabel> lista = new ArrayList<>();
     public int totalPos, seg, min, hor, segTotal, actualPos = 0, points = 0, points2 = 0, actualTime, tipoPregunta, player2Pos = 0, adv;
     public String[] question = new String[5];
-    public GUI type = new GUI();
+    public Pregunta type = new Pregunta();
     public boolean state = true, show = false, change = false, player2 = false, turno = false;
     public ArrayList<Integer> optionList = new ArrayList<>();
     public Random rdm = new Random();
@@ -90,6 +90,12 @@ public class Board extends javax.swing.JFrame {
         singleplayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 singleplayerActionPerformed(evt);
+            }
+        });
+
+        numTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numTxtActionPerformed(evt);
             }
         });
 
@@ -355,7 +361,7 @@ public class Board extends javax.swing.JFrame {
                 } else {
                     points2 = points2 - 150;
                     lista.get(player2Pos).setBackground(Color.yellow);
-                    player2Pos = (int) Math.ceil(player2Pos - adv/2);
+                    player2Pos = (int) (player2Pos - Math.ceil(adv/2));
                     lista.get(player2Pos).setBackground(Color.blue);
                     lista.get(actualPos).setBackground(Color.red);
                     
@@ -425,6 +431,10 @@ public class Board extends javax.swing.JFrame {
         puntaje2.setVisible(true);
         playerTurn.setVisible(true);
     }//GEN-LAST:event_multiplayerActionPerformed
+
+    private void numTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_numTxtActionPerformed
 
     public void createBoard(int boardSquares) {
         for (int i = 0; i < boardSquares; i++) {
