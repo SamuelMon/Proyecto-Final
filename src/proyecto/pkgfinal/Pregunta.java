@@ -42,7 +42,13 @@ public class Pregunta {
     Cual de los siguientes es el Volumen de la caja con lados a="Inserte a", b="Inserte b" y c="Inserte c"?
 
     Tipo 6
+    Cual es el area de el cuadrado con lados a=""insertar a" y b="insertar b" 
     
+    Tipo 7
+    Cual es el area de el circulo con r="insertar r"
+    
+    Tipo 8
+    Cual es la solucion del sistemas de ecuaciones lineales.
     */
     
     // Inicio Metodos
@@ -489,5 +495,116 @@ public class Pregunta {
         //retorno el vector
         return questionType5;
         
+    }
+    
+    public String[] preguntaTipo6(){
+        //Declaro las variables necesacria para generar y retornar una pregunta tipo 6
+        String[] questionType6 = new String[5];
+        int b = rdn.nextInt(10)+10;
+        int a = rdn.nextInt(25)+10;
+        int combination = rdn.nextInt(4);
+        String question ="<html><p>Cual de los siguientes es el area del cuadrado con:<br/> a= " + a + " m" + ", b= " + b + "m</p></html>";
+        int correctAnswer = a*b;
+        int option1 = 0;
+        int option2 = 0;
+        int option3 = 0;
+        
+        //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
+        //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
+        if (combination == 0 )
+        {
+            option1 = correctAnswer + rdn.nextInt(10) + 6;
+            option2 = correctAnswer + rdn.nextInt(5) + 1;
+            option3 = correctAnswer + rdn.nextInt(15) + 16;
+        }
+
+        if (combination == 1 )
+        {
+            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1;
+            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
+            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
+        }
+
+        if (combination == 2 )
+        {
+            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1 ;
+            option2 = correctAnswer + rdn.nextInt(5) + 1;
+            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
+        }
+
+        if (combination == 3 )
+        {
+            option1 = correctAnswer + rdn.nextInt(20) + 6;
+            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
+            option3 = correctAnswer + rdn.nextInt(50) + 26;
+        }
+        
+        
+        
+
+        //Asigno los valores generados a pociciones de un vector 
+        questionType6[0] = question;
+        questionType6[1] = String.valueOf(correctAnswer) + " m^2";
+        questionType6[2] = String.valueOf(option1)+ " m^2";
+        questionType6[3] = String.valueOf(option2)+ " m^2";
+        questionType6[4] = String.valueOf(option3)+ " m^2";
+        
+        //retorno el vector
+        return questionType6;
+    }
+    
+    public String[] preguntaTipo7(){
+        //Declaro las variables necesacria para generar y retornar una pregunta tipo 7
+        String[] questionType7 = new String[5];
+        int r = rdn.nextInt(25)+15;
+        int combination = rdn.nextInt(4);
+        String question ="<html><p>Cual de los siguientes es el area del circulo con:<br/> r= " + r + " m</p></html>";
+        int correctAnswer = (int)Math.pow(r, 2);
+        int option1 = 0;
+        int option2 = 0;
+        int option3 = 0;
+        
+        //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
+        //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
+        if (combination == 0 )
+        {
+            option1 = correctAnswer + rdn.nextInt(10) + 6;
+            option2 = correctAnswer + rdn.nextInt(5) + 1;
+            option3 = correctAnswer + rdn.nextInt(15) + 16;
+        }
+
+        if (combination == 1 )
+        {
+            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1;
+            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
+            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
+        }
+
+        if (combination == 2 )
+        {
+            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1 ;
+            option2 = correctAnswer + rdn.nextInt(5) + 1;
+            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
+        }
+
+        if (combination == 3 )
+        {
+            option1 = correctAnswer + rdn.nextInt(20) + 6;
+            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
+            option3 = correctAnswer + rdn.nextInt(50) + 26;
+        }
+        
+        
+        
+
+        //Asigno los valores generados a pociciones de un vector 
+        questionType7[0] = question;
+        questionType7[1] = String.valueOf(correctAnswer) + "π m^2";
+        questionType7[2] = String.valueOf(option1)+ "π m^2";
+        questionType7[3] = String.valueOf(option2)+ "π m^2";
+        questionType7[4] = String.valueOf(option3)+ "π m^2";
+        
+        //retorno el vector
+        return questionType7;
     }
 }
