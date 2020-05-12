@@ -6,6 +6,7 @@
 package proyecto.pkgfinal;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,10 +21,10 @@ import javax.swing.JOptionPane;
 public class Board extends javax.swing.JFrame {
 
     public ArrayList<JLabel> lista = new ArrayList<>();
-    public int totalPos, seg, min, hor, segTotal, actualPos = 0, points = 0, points2 = 0, actualTime, tipoPregunta, player2Pos = 0, adv;
+    public int totalPos, seg, min, segTotal, actualPos = 0, points = 0, points2 = 0, actualTime, player2Pos = 0, adv;
     public String[] question = new String[5];
     public Pregunta type = new Pregunta();
-    public boolean state = true, show = false, change = false, player2 = false, turno = false;
+    public boolean state = true, show = false, change = false, player2 = false, turno = false, vis = false;
     public ArrayList<Integer> optionList = new ArrayList<>();
     public Random rdm = new Random();
     public ImageIcon imageHelp, imageButton;
@@ -31,6 +32,7 @@ public class Board extends javax.swing.JFrame {
     /**
      * Creates new form Board
      */
+    //Establezco el estado inicial de los componentes de la parte gráfica
     public Board() {
         initComponents();
         puntaje.setText("Jugador 1: " + String.valueOf(points));
@@ -65,7 +67,6 @@ public class Board extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
         singleplayer = new javax.swing.JButton();
-        numTxt = new javax.swing.JTextField();
         rollDice = new javax.swing.JButton();
         puntaje = new javax.swing.JLabel();
         option1 = new javax.swing.JRadioButton();
@@ -80,22 +81,17 @@ public class Board extends javax.swing.JFrame {
         multiplayer = new javax.swing.JButton();
         puntaje2 = new javax.swing.JLabel();
         playerTurn = new javax.swing.JLabel();
+        numTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panel.setLayout(new java.awt.GridLayout(0, 3));
+        panel.setLayout(new java.awt.GridLayout(0, 5));
         jScrollPane1.setViewportView(panel);
 
         singleplayer.setText("1 Jugador");
         singleplayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 singleplayerActionPerformed(evt);
-            }
-        });
-
-        numTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numTxtActionPerformed(evt);
             }
         });
 
@@ -148,6 +144,12 @@ public class Board extends javax.swing.JFrame {
 
         playerTurn.setText("Turno: J1");
 
+        numTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                numTxtKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,8 +186,9 @@ public class Board extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(numTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(5, 5, 5)
+                                .addComponent(numTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(singleplayer)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(multiplayer))
@@ -216,9 +219,9 @@ public class Board extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(numTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(singleplayer)
-                                    .addComponent(multiplayer))
+                                    .addComponent(multiplayer)
+                                    .addComponent(numTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(3, 3, 3)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(puntaje2)
@@ -228,6 +231,7 @@ public class Board extends javax.swing.JFrame {
                         .addComponent(rollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pregunta)
                         .addGap(2, 2, 2)
@@ -244,31 +248,42 @@ public class Board extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(responder)
                             .addComponent(hint))
-                        .addContainerGap(133, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1)))
+                        .addGap(51, 133, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Botón para iniciar el juego en un solo jugador
     private void singleplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleplayerActionPerformed
         // TODO add your handling code here:
         totalPos = Integer.parseInt(numTxt.getText());
+        if (totalPos > 2){
+        //Limpio el panel existente para cuando se quiera reiniciar el juego, asi como la lista de labels.
         panel.removeAll();
         lista.clear();
         actualPos = 0;
+        //Llamo al método para crear el tablero
         createBoard(totalPos);
+        //Marco la posicion inicial con un color diferente
         lista.get(actualPos).setBackground(Color.red);
         puntaje.setText("Puntaje: " + points);
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor ingrese números mayores a 2");
+        }
     }//GEN-LAST:event_singleplayerActionPerformed
 
+    //Botón para tirar el dado
     private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollDiceActionPerformed
         // TODO add your handling code here:
+        //Compruebo el tamaño del tablero para configurar el maximo valor del dado
         if (totalPos <= 10) {
             adv = rdm.nextInt(3) + 1;
         } else {
             adv = rdm.nextInt(6) + 1;
         }
+        //Establezco los casos para el número sacado por el dado
+        //Tambien se cambia la imagen del boton dependiendo de lo que saque
         switch (adv) {
             case 1:
                 imageButton = new ImageIcon("src/imagenes/dado1.png");
@@ -296,33 +311,44 @@ public class Board extends javax.swing.JFrame {
                 break;
         }
 
+        //Se comprueba si se inició el juego con uno o dos jugadores
         if (player2 == true) {
+            //Se comprueba el turno actual. En caso de ser falso, es el turno del jugador uno.
             if (turno == false) {
+                //Se "limpia" la posicion actual
                 lista.get(actualPos).setBackground(Color.yellow);
+                //Se comprueba que con el número sacado no se salga del tablero
+                //Y se cambia el turno en caso de ser asi
                 if (advancePosition(actualPos) == -1) {
                     turno = !turno;
-                    lista.get(actualPos).setBackground(Color.red);
+                    playerTurn.setText("Turno: J2");
                 } else {
+                    //Se llama al método advancePosition para avanzar la posición
                     actualPos = advancePosition(actualPos);
-                    lista.get(actualPos).setBackground(Color.red);
                 }
             } else {
+                //Este caso es igual que el anterior pero para el jugador dos
                 lista.get(player2Pos).setBackground(Color.yellow);
                 if (advancePosition(player2Pos) == -1) {
                     turno = !turno;
-                    lista.get(player2Pos).setBackground(Color.blue);
+                    playerTurn.setText("Turno: J1");
                 } else {
                     player2Pos = advancePosition(player2Pos);
-                    lista.get(player2Pos).setBackground(Color.blue);
                 }
             }
+            //Se comparan las posiciones de ambos jugadores
             if (player2Pos == actualPos) {
+                //Si es igual se pinta esa posicion de un color diferente
                 lista.get(actualPos).setBackground(Color.magenta);
             } else {
+                //Sino se pintan ambos por separado
                 lista.get(player2Pos).setBackground(Color.blue);
                 lista.get(actualPos).setBackground(Color.red);
             }
+
         } else {
+            //El caso para un jugador funciona igual que el caso para dos
+            //Pero no hay necesidad de hacer la comprobación de turno asi que solo se pinta la posición donde caiga
             lista.get(actualPos).setBackground(Color.yellow);
             if (advancePosition(actualPos) == -1) {
                 lista.get(actualPos).setBackground(Color.red);
@@ -333,190 +359,221 @@ public class Board extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rollDiceActionPerformed
 
+    //Boton para responder a la pregunta
     private void responderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responderActionPerformed
         // TODO add your handling code here:
-        String respuesta;
-        if (comprobarRespuesta() == true) {
-            respuesta = "Correcto";
-            JOptionPane.showMessageDialog(null, respuesta);
+        //Asigno un texto al String respuesta con el método comprobarRespuesta
+        String respuesta = comprobarRespuesta();
+        //Compruebo a respuesta y tomo acciones para cada caso
+        if (respuesta.equals("No")) {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una opción antes de responder");
         } else {
-            respuesta = "Incorrecto";
-            JOptionPane.showMessageDialog(null, respuesta);
-        }
-        if (player2 == true) {
-            if (turno == false) {
+            if (respuesta.equals("Correcto")) {
+                JOptionPane.showMessageDialog(null, respuesta);
+            } else {
+                JOptionPane.showMessageDialog(null, respuesta);
+            }
+            //Nuevamente compruebo si se inició el juego para uno o dos jugadores
+            if (player2 == true) {
+                //Compruebo el turno
+                if (turno == false) {
+                    //Si la respuesta es correcta se suman 100 puntos
+                    if (respuesta.equals("Correcto")) {
+                        points = points + 100;
+                    } else {
+                        //Sino se le restan 150 y se le retrocede la mitad del avance
+                        points = points - 150;
+                        lista.get(actualPos).setBackground(Color.yellow);
+                        actualPos = (int) (actualPos - Math.ceil(adv / 2));
+                    }
+                    //Se cambia el texto que muestra el turno actual
+                    playerTurn.setText("Turno: J2");
+                } else {
+                    //Este es el caso para el segundo jugador
+                    //Se hacen las mismas comprobaciones y acciones que con el primero
+                    if (respuesta.equals("Correcto")) {
+                        points2 = points2 + 100;
+                    } else {
+                        points2 = points2 - 150;
+                        lista.get(player2Pos).setBackground(Color.yellow);
+                        player2Pos = (int) (player2Pos - Math.ceil(adv / 2));
+
+                    }
+                    playerTurn.setText("Turno: J1");
+                }
+                //Se comprueban sus posiciones y se pintan.
+                if (actualPos == player2Pos) {
+                    lista.get(player2Pos).setBackground(Color.magenta);
+                } else {
+                    lista.get(player2Pos).setBackground(Color.blue);
+                    lista.get(actualPos).setBackground(Color.red);
+                }
+                //Se muestran los puntajes actuales luego de haber respondido
+                puntaje.setText("Puntaje J1: " + points);
+                puntaje2.setText("Puntaje J2: " + points2);
+            } else {
+                //Este es el caso de si el juego se inició con un solo jugador
+                //Igual que con los dos jugadores se comprueba si acertó la pregunta y suma o resta puntos
                 if (respuesta.equals("Correcto")) {
                     points = points + 100;
                 } else {
                     points = points - 150;
                     lista.get(actualPos).setBackground(Color.yellow);
-                    actualPos = (int) (actualPos - Math.ceil(adv/2));
+                    actualPos = (int) (actualPos - Math.ceil(adv / 2));
                     lista.get(actualPos).setBackground(Color.red);
-                    lista.get(player2Pos).setBackground(Color.blue);
                 }
-                playerTurn.setText("Turno: J2");
-            } else {
-                if (respuesta.equals("Correcto")) {
-                    points2 = points2 + 100;
+                //Se actualiza el mensaje de los puntos
+                puntaje.setText("Puntaje: " + points);
+            }
+            
+            //Compruebo si algun jugador llegó a la última posicion del tablero
+            if (totalPos - 1 == actualPos || totalPos - 1 == player2Pos) {
+                //Cambio a state a false para que pare el cronometro
+                state = false;
+                //Se comprueba si hay dos jugadores
+                if (player2 == true) {
+                    //Se comprueba cual de los dos llegó al final
+                    if (totalPos - 1 == actualPos) {
+                        JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>El jugador 1 gana");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>El jugador 2 gana");
+                    }
                 } else {
-                    points2 = points2 - 150;
-                    lista.get(player2Pos).setBackground(Color.yellow);
-                    player2Pos = (int) (player2Pos - Math.ceil(adv/2));
-                    lista.get(player2Pos).setBackground(Color.blue);
-                    lista.get(actualPos).setBackground(Color.red);
-                    
-                }
-                playerTurn.setText("Turno: J2");
-            }
-            if (actualPos == player2Pos) {
-                lista.get(player2Pos).setBackground(Color.magenta);
-            }
-            puntaje.setText("Puntaje J1: " + points);
-            puntaje2.setText("Puntaje J2: " + points2);
-        } else {
-            if (respuesta.equals("Correcto")) {
-                points = points + 100;
-            } else {
-                points = points - 150;
-                lista.get(actualPos).setBackground(Color.yellow);
-                actualPos = (int) (actualPos - Math.ceil(adv/2));
-                lista.get(actualPos).setBackground(Color.red);
-            }
-            puntaje.setText("Puntaje: " + points);
-        }
-
-        if (totalPos - 1 == actualPos || totalPos - 1 == player2Pos) {
-            state = false;
-            if (player2 == true) {
-                if (totalPos - 1 == actualPos) {
-                    JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>El jugador 1 gana");
-                } else {
-                    JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>El jugador 2 gana");
+                    //Si solo hay un jugador se muestra el tiempo y los puntos que consiguió
+                    JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>Puntaje: " + points);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>Puntaje: " + points);
+                //Si el juego no se ha acabado, habilito la siguiente tirada
+                rollDice.setEnabled(true);
             }
-        } else {
-            rollDice.setEnabled(true);
+            //Oculto las opciones de respuesta
+            show = true;
+            responder.setVisible(false);
+            option1.setVisible(false);
+            option2.setVisible(false);
+            option3.setVisible(false);
+            option4.setVisible(false);
+            pregunta.setVisible(false);
+            help.setVisible(false);
+            hint.setVisible(false);
+            //Lismpio la seleccion y el orden de las opciones
+            optionList.clear();
+            answers.clearSelection();
+            //Cambio el turno
+            turno = !turno;
         }
-        responder.setVisible(false);
-        option1.setVisible(false);
-        option2.setVisible(false);
-        option3.setVisible(false);
-        option4.setVisible(false);
-        pregunta.setVisible(false);
-        help.setVisible(false);
-        hint.setVisible(false);
-        optionList.clear();
-        answers.clearSelection();
-        turno = !turno;
     }//GEN-LAST:event_responderActionPerformed
 
+    //Boton para mostrar la ayuda
     private void hintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hintActionPerformed
         // TODO add your handling code here:
+        //Cambio la visibilidad de la imagen de ayuda a su opuesta
         change = !change;
         help.setVisible(change);
     }//GEN-LAST:event_hintActionPerformed
 
+    //Boton para inciar con dos jugadores
     private void multiplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplayerActionPerformed
         // TODO add your handling code here:
+        //Hago verdadero la opcion de los dos jugadores
         player2 = true;
         totalPos = Integer.parseInt(numTxt.getText());
+        if (totalPos > 2){
+        //Limpio el panel existente para cuando se quiera reiniciar el juego, asi como la lista de labels.
         panel.removeAll();
         lista.clear();
         actualPos = 0;
+        //Creo el tablero con el método createBoard
         createBoard(totalPos);
+        //Pinto la posicion inicial de ambos jugadores
         lista.get(actualPos).setBackground(Color.magenta);
         puntaje.setVisible(true);
         puntaje2.setVisible(true);
         playerTurn.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor ingrese números mayores a 2");
+        }
     }//GEN-LAST:event_multiplayerActionPerformed
 
-    private void numTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numTxtActionPerformed
+    private void numTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numTxtKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_numTxtActionPerformed
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_numTxtKeyTyped
 
+    //Método para crear el tablero
     public void createBoard(int boardSquares) {
+        //Inicio un ciclo hasta el total de posiciones que le envié al método
         for (int i = 0; i < boardSquares; i++) {
+            //Creo un nuevo label y le asigno su posicion como nombre/texto.
             JLabel label = new JLabel(String.valueOf(i + 1));
+            //Le pinto el fondo de amarillo y lo configuro como opaque para que se vea el color
             label.setBackground(Color.yellow);
             label.setOpaque(true);
+            //Configuro su texto en el centro
             label.setHorizontalAlignment(0);
+            //Agrego el label a una lista y a un panel
             lista.add(label);
             panel.add(label);
         }
+        //Actualizo la apariencia del panel
         panel.updateUI();
+        //Inicio los segundos y minutos en 0 e inicio el cronómetro
         seg = 0;
         min = 0;
-        hor = 0;
         cronometro();
+        //Oculto los botones y mustro todo lo que pueda interesar al usuario
         singleplayer.setVisible(false);
         multiplayer.setVisible(false);
         puntaje.setVisible(true);
         time.setVisible(true);
         rollDice.setVisible(true);
         numTxt.setVisible(false);
+        //Compruebo si se habilitaron los dos jugadores para mostrar o no el segundo puntaje
         if (player2 == true) {
             puntaje2.setVisible(true);
         }
     }
 
+    //Método de cronómetro
     public void cronometro() {
+        //Inicio el estado del cronometro como activo, es decir true
         state = true;
         Thread hilo = new Thread() {
             public void run() {
+                //Inicio un ciclo sin parametros
                 for (;;) {
+                    //Compruebo que el estado del cronometro sea true
                     if (state == true) {
                         try {
+                            //Aplico un sleep para retrazar el proceso
                             sleep(1000);
+                            //Sumo 1 a los segundos
                             seg++;
                             segTotal++;
+                            //Compruebo que cuando alcance 60 segundos se comvierta en 1 minuto
                             if (seg >= 60) {
                                 seg = 0;
                                 min++;
                             }
-                            if (min >= 60) {
-                                min = 0;
-                                hor++;
-                            }
-                            time.setText(hor + ":" + min + ":" + seg);
-                        } catch (InterruptedException e) {
-
-                        }
-                    } else {
-                        break;
-                    }
-                }
-            }
-        };
-        hilo.start();
-    }
-
-    public void showHelp() {
-        show = false;
-        actualTime = 0;
-        Thread hilo = new Thread() {
-            public void run() {
-                for (;;) {
-                    if (show == false) {
-                        try {
-                            sleep(1000);
-                            actualTime++;
-                            if (actualTime >= 7) {
-                                if (tipoPregunta != 1) {
-                                    show = true;
-                                    change = false;
-                                    hint.setVisible(show);
-                                } else {
-                                    show = true;
-                                }
+                            //Hago ciertas comprobaciones para que se vea de una forma u otra
+                            //En verdad esto es innicesario pero considero que asi se ve mejor
+                            if (seg < 10 && min < 10) {
+                                time.setText("0" + min + ":0" + seg);
+                            } else if (min < 10) {
+                                time.setText("0" + min + ":" + seg);
+                            } else if (seg < 10) {
+                                time.setText(min + ":0" + seg);
                             } else {
-                                hint.setVisible(show);
+                                time.setText(min + ":" + seg);
                             }
                         } catch (InterruptedException e) {
 
                         }
                     } else {
+                        //Se configura para cuando state no sea verdadero se rompa el ciclo
                         break;
                     }
                 }
@@ -525,48 +582,76 @@ public class Board extends javax.swing.JFrame {
         hilo.start();
     }
 
+    //Método para asignar respuestar aleatorias a las opciones
     public void asignarRespuestas() {
+        //Se inicia un ciclo hasta que el tamaño de una lista sea 4
         for (int i = 0; optionList.size() < 4; i++) {
+            //Se asigna un valor aleatorio
             int opt = rdm.nextInt(4) + 1;
+            //Se comprueba que la lista no contenga ya ese valor
             if (!optionList.contains(opt)) {
+                //Si no lo contiene se agrega
                 optionList.add(opt);
             }
         }
+        //Se asignan los valores de la lista (que son aleatorios entre 1 y 4) a las opciones de respuesta
         option1.setText(question[optionList.get(0)]);
         option2.setText(question[optionList.get(1)]);
         option3.setText(question[optionList.get(2)]);
         option4.setText(question[optionList.get(3)]);
     }
 
+    //Método para avanzar posiciones
     public int advancePosition(int pos) {
+        //Primero compruebo que es número que me enviaron mas el avance no se salga de la tabla
         if (pos + adv < totalPos) {
-            String strPos = String.valueOf(pos);
-            if (strPos.endsWith("0") || strPos.endsWith("5")) {
-                tipoPregunta = 1;
-                question = type.preguntaTipo1();
-            } else if (strPos.endsWith("1") || strPos.endsWith("6")) {
-                question = type.preguntaTipo2();
-                tipoPregunta = 2;
-                imageHelp = new ImageIcon("src/imagenes/teoremaPitagoras.jpg");
-                help.setIcon(imageHelp);
-            } else if (strPos.endsWith("2") || strPos.endsWith("7")) {
-                question = type.preguntaTipo3();
-                tipoPregunta = 3;
-                imageHelp = new ImageIcon("src/imagenes/formulaCuadratica.jpg");
-                help.setIcon(imageHelp);
-            } else if (strPos.endsWith("3") || strPos.endsWith("8")) {
-                question = type.preguntaTipo4();
-                tipoPregunta = 4;
-                imageHelp = new ImageIcon("src/imagenes/volumenCilindro.jpg");
-                help.setIcon(imageHelp);
-            } else if (strPos.endsWith("4") || strPos.endsWith("9")) {
-                question = type.preguntaTipo5();
-                tipoPregunta = 5;
-                imageHelp = new ImageIcon("src/imagenes/volumenCaja.jpg");
-                help.setIcon(imageHelp);
+            //Se crea un número aleatorio que determina el tipo de pregunta
+            int qstn = rdm.nextInt(7)+1;
+            //Se crean los diferentes casos para qstn
+            //Para algunos se habilita el botón de ayuda y se configura una imagen que se 
+            //muestra al presionar el botón
+            switch (qstn) {
+                case 1:
+                    hint.setVisible(false);
+                    question = type.preguntaTipo1();
+                    break;
+                case 2:
+                    question = type.preguntaTipo2();
+                    hint.setVisible(true);
+                    imageHelp = new ImageIcon("src/imagenes/teoremaPitagoras.jpg");
+                    help.setIcon(imageHelp);
+                    break;
+                case 3:
+                    question = type.preguntaTipo3();
+                    hint.setVisible(true);
+                    imageHelp = new ImageIcon("src/imagenes/formulaCuadratica.jpg");
+                    help.setIcon(imageHelp);
+                    break;
+                case 4:
+                    question = type.preguntaTipo4();
+                    hint.setVisible(true);
+                    imageHelp = new ImageIcon("src/imagenes/volumenCilindro.jpg");
+                    help.setIcon(imageHelp);
+                    break;
+                case 5:
+                    question = type.preguntaTipo5();
+                    hint.setVisible(true);
+                    imageHelp = new ImageIcon("src/imagenes/volumenCaja.jpg");
+                    help.setIcon(imageHelp);
+                    break;
+                case 6:
+                    question = type.preguntaTipo6();
+                    hint.setVisible(false);
+                    break;
+                case 7:
+                    question = type.preguntaTipo7();
+                    hint.setVisible(false);
+                    break;
             }
             pregunta.setText(question[0]);
+            //Asigno las posibles respuestas a las opciones
             asignarRespuestas();
+            //Se hacen visibles las opciones de respuesta, asi como la pregunta
             rollDice.setEnabled(false);
             responder.setVisible(true);
             option1.setVisible(true);
@@ -574,27 +659,37 @@ public class Board extends javax.swing.JFrame {
             option3.setVisible(true);
             option4.setVisible(true);
             pregunta.setVisible(true);
-            showHelp();
+            actualTime = 0;
+            //Retorna la nueva posición
             return (pos + adv);
         } else {
+            //En caso de que se salga del tablero retorna -1
             JOptionPane.showMessageDialog(null, "El número sacado se sale del tablero");
             return (-1);
         }
     }
 
-    public boolean comprobarRespuesta() {
-        boolean correcto;
-        if (option1.isSelected() && option1.getText().equals(question[1])) {
-            correcto = true;
+    //Este método comprueba si la respuesta es correcta
+    public String comprobarRespuesta() {
+        String correcto;
+        //Primero comprueba que haya al menos una respuesta seleccionada
+        if (!option1.isSelected() && !option2.isSelected() && !option3.isSelected() && !option4.isSelected()) {
+            correcto = "No";
+            //Si hay alguna seleccionada la compara con la respuesta correcta
+        } else if (option1.isSelected() && option1.getText().equals(question[1])) {
+            //Si son iguales asigna el mensaje de "Correcto"
+            correcto = "Correcto";
         } else if (option2.isSelected() && option2.getText().equals(question[1])) {
-            correcto = true;
+            correcto = "Correcto";
         } else if (option3.isSelected() && option3.getText().equals(question[1])) {
-            correcto = true;
+            correcto = "Correcto";
         } else if (option4.isSelected() && option4.getText().equals(question[1])) {
-            correcto = true;
+            correcto = "Correcto";
         } else {
-            correcto = false;
+            //Si no son iguales asigna "Incorrecto"
+            correcto = "Incorrecto";
         }
+        //Retorna el mensaje
         return (correcto);
     }
 
