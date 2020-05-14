@@ -6,10 +6,10 @@
 package proyecto.pkgfinal;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,10 +21,10 @@ import javax.swing.JOptionPane;
 public class Board extends javax.swing.JFrame {
 
     public ArrayList<JLabel> lista = new ArrayList<>();
-    public int totalPos, seg, min, segTotal, actualPos = 0, points = 0, points2 = 0, actualTime, player2Pos = 0, adv;
+    public int totalPos, seg, min, segTotal, actualPos = 0, points = 0, points2 = 0, player2Pos = 0, adv;
     public String[] question = new String[5];
     public Pregunta type = new Pregunta();
-    public boolean state = true, show = false, change = false, player2 = false, turno = false, vis = false;
+    public boolean state = true, change = false, player2 = false, turno = false;
     public ArrayList<Integer> optionList = new ArrayList<>();
     public Random rdm = new Random();
     public ImageIcon imageHelp, imageButton;
@@ -35,8 +35,8 @@ public class Board extends javax.swing.JFrame {
     //Establezco el estado inicial de los componentes de la parte gráfica
     public Board() {
         initComponents();
-        puntaje.setText("Jugador 1: " + String.valueOf(points));
-        puntaje2.setText("Jugador 2: " + String.valueOf(points2));
+        puntaje.setText("Puntaje J1: " + String.valueOf(points));
+        puntaje2.setText("Puntaje J2: " + String.valueOf(points2));
         imageButton = new ImageIcon("src/imagenes/dado1.png");
         rollDice.setIcon(imageButton);
         puntaje.setVisible(false);
@@ -52,6 +52,11 @@ public class Board extends javax.swing.JFrame {
         help.setVisible(false);
         hint.setVisible(false);
         playerTurn.setVisible(false);
+        state = false;
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        IniciarNuevoJuego nuevo = new IniciarNuevoJuego(this, true);
+        nuevo.setVisible(true);
     }
 
     /**
@@ -66,7 +71,6 @@ public class Board extends javax.swing.JFrame {
         answers = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
-        singleplayer = new javax.swing.JButton();
         rollDice = new javax.swing.JButton();
         puntaje = new javax.swing.JLabel();
         option1 = new javax.swing.JRadioButton();
@@ -78,22 +82,15 @@ public class Board extends javax.swing.JFrame {
         time = new javax.swing.JLabel();
         help = new javax.swing.JLabel();
         hint = new javax.swing.JButton();
-        multiplayer = new javax.swing.JButton();
         puntaje2 = new javax.swing.JLabel();
         playerTurn = new javax.swing.JLabel();
-        numTxt = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panel.setLayout(new java.awt.GridLayout(0, 5));
         jScrollPane1.setViewportView(panel);
-
-        singleplayer.setText("1 Jugador");
-        singleplayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                singleplayerActionPerformed(evt);
-            }
-        });
 
         rollDice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +121,7 @@ public class Board extends javax.swing.JFrame {
 
         pregunta.setText("Pregunta");
 
-        time.setText("00:00:00");
+        time.setText("00:00");
 
         hint.setText("?");
         hint.addActionListener(new java.awt.event.ActionListener() {
@@ -133,108 +130,79 @@ public class Board extends javax.swing.JFrame {
             }
         });
 
-        multiplayer.setText("2 Jugadores");
-        multiplayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                multiplayerActionPerformed(evt);
-            }
-        });
-
         puntaje2.setText("Puntaje 2");
 
         playerTurn.setText("Turno: J1");
 
-        numTxt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                numTxtKeyTyped(evt);
+        jMenu1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu1.setText("Nuevo Juego");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
             }
         });
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(puntaje)
+                    .addComponent(time)
+                    .addComponent(puntaje2)
+                    .addComponent(playerTurn)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(rollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(option3)
-                                            .addComponent(option4)
-                                            .addComponent(option2)
-                                            .addComponent(option1)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(41, 41, 41)
-                                                .addComponent(responder)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(hint)))
-                                        .addGap(0, 14, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(pregunta)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(help)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(numTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(singleplayer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(multiplayer))
-                            .addComponent(playerTurn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(puntaje)
-                            .addComponent(puntaje2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(time)
-                        .addGap(16, 16, 16))))
+                            .addComponent(option2)
+                            .addComponent(option4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(responder)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hint))
+                            .addComponent(option3)
+                            .addComponent(option1)
+                            .addComponent(pregunta)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(help)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(time))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(puntaje)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(singleplayer)
-                                    .addComponent(multiplayer)
-                                    .addComponent(numTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(3, 3, 3)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(puntaje2)
-                            .addComponent(playerTurn)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(rollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                        .addComponent(time)
+                        .addGap(18, 18, 18)
+                        .addComponent(puntaje)
+                        .addGap(18, 18, 18)
+                        .addComponent(puntaje2)
+                        .addGap(18, 18, 18)
+                        .addComponent(playerTurn)
+                        .addGap(74, 74, 74)
+                        .addComponent(rollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pregunta)
-                        .addGap(2, 2, 2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(help)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(option1)
@@ -244,34 +212,15 @@ public class Board extends javax.swing.JFrame {
                         .addComponent(option3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(option4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(responder)
-                            .addComponent(hint))
-                        .addGap(51, 133, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hint)
+                            .addComponent(responder))))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //Botón para iniciar el juego en un solo jugador
-    private void singleplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleplayerActionPerformed
-        // TODO add your handling code here:
-        totalPos = Integer.parseInt(numTxt.getText());
-        if (totalPos > 2){
-        //Limpio el panel existente para cuando se quiera reiniciar el juego, asi como la lista de labels.
-        panel.removeAll();
-        lista.clear();
-        actualPos = 0;
-        //Llamo al método para crear el tablero
-        createBoard(totalPos);
-        //Marco la posicion inicial con un color diferente
-        lista.get(actualPos).setBackground(Color.red);
-        puntaje.setText("Puntaje: " + points);
-        }else{
-            JOptionPane.showMessageDialog(null, "Por favor ingrese números mayores a 2");
-        }
-    }//GEN-LAST:event_singleplayerActionPerformed
 
     //Botón para tirar el dado
     private void rollDiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollDiceActionPerformed
@@ -425,7 +374,7 @@ public class Board extends javax.swing.JFrame {
                 //Se actualiza el mensaje de los puntos
                 puntaje.setText("Puntaje: " + points);
             }
-            
+
             //Compruebo si algun jugador llegó a la última posicion del tablero
             if (totalPos - 1 == actualPos || totalPos - 1 == player2Pos) {
                 //Cambio a state a false para que pare el cronometro
@@ -447,7 +396,6 @@ public class Board extends javax.swing.JFrame {
                 rollDice.setEnabled(true);
             }
             //Oculto las opciones de respuesta
-            show = true;
             responder.setVisible(false);
             option1.setVisible(false);
             option2.setVisible(false);
@@ -472,17 +420,55 @@ public class Board extends javax.swing.JFrame {
         help.setVisible(change);
     }//GEN-LAST:event_hintActionPerformed
 
-    //Boton para inciar con dos jugadores
-    private void multiplayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplayerActionPerformed
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // TODO add your handling code here:
-        //Hago verdadero la opcion de los dos jugadores
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        state = false;
+        rollDice.setEnabled(false);
+        responder.setEnabled(false);
+        hint.setEnabled(false);
+        state = false;
+        change = false;
+        player2 = false;
+        turno = false;
+        IniciarNuevoJuego nuevo = new IniciarNuevoJuego(this, true);
+        nuevo.setVisible(true);
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    public void singleplayer(int num) {
+        //Limpio el panel existente para cuando se quiera reiniciar el juego, asi como la lista de labels.
+        panel.removeAll();
+        lista.clear();
+        totalPos = num;
+        actualPos = 0;
+        points = 0;
+        points2 = 0;
+        //Llamo al método para crear el tablero
+        createBoard(totalPos);
+        //Marco la posicion inicial con un color diferente
+        lista.get(actualPos).setBackground(Color.red);
+        puntaje.setText("Puntaje: " + points);
+        state = true;
+        rollDice.setEnabled(true);
+        responder.setEnabled(true);
+        hint.setEnabled(true);
+        puntaje2.setVisible(false);
+        playerTurn.setVisible(false);
+    }
+
+    public void multiplayer(int num) {
         player2 = true;
-        totalPos = Integer.parseInt(numTxt.getText());
-        if (totalPos > 2){
+        totalPos = num;
         //Limpio el panel existente para cuando se quiera reiniciar el juego, asi como la lista de labels.
         panel.removeAll();
         lista.clear();
         actualPos = 0;
+        player2Pos = 0;
+        points = 0;
+        points2 = 0;
         //Creo el tablero con el método createBoard
         createBoard(totalPos);
         //Pinto la posicion inicial de ambos jugadores
@@ -490,18 +476,11 @@ public class Board extends javax.swing.JFrame {
         puntaje.setVisible(true);
         puntaje2.setVisible(true);
         playerTurn.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Por favor ingrese números mayores a 2");
-        }
-    }//GEN-LAST:event_multiplayerActionPerformed
-
-    private void numTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_numTxtKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_numTxtKeyTyped
+        state = true;
+        rollDice.setEnabled(true);
+        responder.setEnabled(true);
+        hint.setEnabled(true);
+    }
 
     //Método para crear el tablero
     public void createBoard(int boardSquares) {
@@ -515,6 +494,7 @@ public class Board extends javax.swing.JFrame {
             //Configuro su texto en el centro
             label.setHorizontalAlignment(0);
             //Agrego el label a una lista y a un panel
+            label.setBorder(BorderFactory.createLineBorder(Color.black));
             lista.add(label);
             panel.add(label);
         }
@@ -523,14 +503,12 @@ public class Board extends javax.swing.JFrame {
         //Inicio los segundos y minutos en 0 e inicio el cronómetro
         seg = 0;
         min = 0;
+        segTotal = 0;
         cronometro();
         //Oculto los botones y mustro todo lo que pueda interesar al usuario
-        singleplayer.setVisible(false);
-        multiplayer.setVisible(false);
         puntaje.setVisible(true);
         time.setVisible(true);
         rollDice.setVisible(true);
-        numTxt.setVisible(false);
         //Compruebo si se habilitaron los dos jugadores para mostrar o no el segundo puntaje
         if (player2 == true) {
             puntaje2.setVisible(true);
@@ -606,7 +584,7 @@ public class Board extends javax.swing.JFrame {
         //Primero compruebo que es número que me enviaron mas el avance no se salga de la tabla
         if (pos + adv < totalPos) {
             //Se crea un número aleatorio que determina el tipo de pregunta
-            int qstn = rdm.nextInt(7)+1;
+            int qstn = rdm.nextInt(7) + 1;
             //Se crean los diferentes casos para qstn
             //Para algunos se habilita el botón de ayuda y se configura una imagen que se 
             //muestra al presionar el botón
@@ -659,7 +637,6 @@ public class Board extends javax.swing.JFrame {
             option3.setVisible(true);
             option4.setVisible(true);
             pregunta.setVisible(true);
-            actualTime = 0;
             //Retorna la nueva posición
             return (pos + adv);
         } else {
@@ -732,9 +709,9 @@ public class Board extends javax.swing.JFrame {
     private javax.swing.ButtonGroup answers;
     private javax.swing.JLabel help;
     private javax.swing.JButton hint;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton multiplayer;
-    private javax.swing.JTextField numTxt;
     private javax.swing.JRadioButton option1;
     private javax.swing.JRadioButton option2;
     private javax.swing.JRadioButton option3;
@@ -746,7 +723,6 @@ public class Board extends javax.swing.JFrame {
     private javax.swing.JLabel puntaje2;
     private javax.swing.JButton responder;
     private javax.swing.JButton rollDice;
-    private javax.swing.JButton singleplayer;
     private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }
