@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
  */
 public class Pregunta {
     public Random rdn = new Random();
-    private String[] questionTypeX = new String[5];
     
     
     public Pregunta(){
@@ -281,32 +280,41 @@ public class Pregunta {
             guide = 2;
         }
         
-        if (combination == 0 )
-        {
-           option1 = correctAnswer + rdn.nextInt(20) + 6;
-           option2 = correctAnswer + rdn.nextInt(5) + 1;
-           option3 = correctAnswer + rdn.nextInt(50) + 26;
-        }
+        //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
+        //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
+        switch (combination){
+            case 0:{
+                option1 = correctAnswer + rdn.nextInt(20) + 6;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 = correctAnswer + rdn.nextInt(50) + 26;
+                break;
+            }
 
-        if (combination == 1 )
-        {
-            option1 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1;
-            option2 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
-            option3 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
-        }
+            case 1:{
+                option1 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1;
+                option2 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+                option3 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
+                break;
+            }
 
-        if (combination == 2 )
-        {
-            option1 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
-        }
+            case 2:{
+                option1 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
+                break;
+            }
 
-        if (combination == 3 )
-        {
-            option1 = correctAnswer + rdn.nextInt(20) + 6;
-            option2 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
-            option3 = correctAnswer + rdn.nextInt(50) + 26;
+            case 3:{
+                option1 = correctAnswer + rdn.nextInt(20) + 6;
+                option2 = correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+                option3 = correctAnswer + rdn.nextInt(50) + 26;
+                break;
+            }
+            
+            default:{
+                JOptionPane.showConfirmDialog(null,"Hubo un error en la variable COMBINATION, porfavor reporte este problema","ERROR",JOptionPane.CLOSED_OPTION);
+                break;
+            }
         }
         
         questionType2[0]="<html><p>Cual de los siguientes es el valor de la hipotenusa del triangulo con catetos <br/>a= " + a + ", b= " + b + "</p></html>";
@@ -390,32 +398,39 @@ public class Pregunta {
         
         //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
         //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
-        if (combination == 0 )
-        {
-            option1 = correctAnswer + rdn.nextInt(10) + 1;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer + rdn.nextInt(15) + 1;
-        }
+        switch (combination){
+            case 0:{
+                option1 = correctAnswer + rdn.nextInt(10) + 1;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 = correctAnswer + rdn.nextInt(15) + 1;
+                break;
+            }
 
-        if (combination == 1 )
-        {
-            option1 = correctAnswer - rdn.nextInt(10) - 1;
-            option2 = correctAnswer - rdn.nextInt(5) - 1;
-            option3 = correctAnswer - rdn.nextInt(15) - 1;
-        }
+            case 1:{
+                option1 =(int) correctAnswer - rdn.nextInt(10) - 1;
+                option2 =(int) correctAnswer - rdn.nextInt(5) - 1;
+                option3 =(int) correctAnswer - rdn.nextInt(15) - 1;
+                break;
+            }
 
-        if (combination == 2 )
-        {
-            option1 = correctAnswer - rdn.nextInt(10) - 1;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer - rdn.nextInt(15) - 1;
-        }
+            case 2:{
+                option1 =(int) correctAnswer - rdn.nextInt(10) - 1;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 =(int) correctAnswer - rdn.nextInt(15) - 1;
+                break;
+            }
 
-        if (combination == 3 )
-        {
-            option1 = correctAnswer + rdn.nextInt(10) + 1;
-            option2 = correctAnswer - rdn.nextInt(5) - 1;
-            option3 = correctAnswer + rdn.nextInt(15) + 1;
+            case 3:{
+                option1 = correctAnswer + rdn.nextInt(10) + 1;
+                option2 =(int) correctAnswer - rdn.nextInt(5) - 1;
+                option3 = correctAnswer + rdn.nextInt(15) + 1;
+                break;
+            }
+            
+            default:{
+                JOptionPane.showConfirmDialog(null,"Hubo un error en la variable COMBINATION, porfavor reporte este problema","ERROR",JOptionPane.CLOSED_OPTION);
+                break;
+            }
         }
         
         //En caso de que los numeros generados sean negativos, se les multiplicará por -1
@@ -457,32 +472,40 @@ public class Pregunta {
         
         //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
         //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
-        if (combination == 0 )
-        {
-            option1 = correctAnswer + rdn.nextInt(10) + 6;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer + rdn.nextInt(15) + 16;
-        }
 
-        if (combination == 1 )
-        {
-            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1;
-            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
-            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
-        }
+        switch (combination){
+            case 0:{
+                option1 = correctAnswer + rdn.nextInt(10) + 6;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 = correctAnswer + rdn.nextInt(15) + 16;
+                break;
+            }
 
-        if (combination == 2 )
-        {
-            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1 ;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
-        }
+            case 1:{
+                option1 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1;
+                option2 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+                option3 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
+                break;
+            }
 
-        if (combination == 3 )
-        {
-            option1 = correctAnswer + rdn.nextInt(20) + 6;
-            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
-            option3 = correctAnswer + rdn.nextInt(50) + 26;
+            case 2:{
+                option1 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1 ;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
+                break;
+            }
+
+            case 3:{
+                option1 = correctAnswer + rdn.nextInt(20) + 6;
+                option2 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+                option3 = correctAnswer + rdn.nextInt(50) + 26;
+                break;
+            }
+            
+            default:{
+                JOptionPane.showConfirmDialog(null,"Hubo un error en la variable COMBINATION, porfavor reporte este problema","ERROR",JOptionPane.CLOSED_OPTION);
+                break;
+            }
         }
         
         //Asigno los valores generados a pociciones de un vector 
@@ -511,34 +534,42 @@ public class Pregunta {
         
         //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
         //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
-        if (combination == 0 )
-        {
-            option1 = correctAnswer + rdn.nextInt(10) + 6;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer + rdn.nextInt(15) + 16;
-        }
 
-        if (combination == 1 )
-        {
-            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1;
-            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
-            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
-        }
+        switch (combination){
+            case 0:{
+                option1 = correctAnswer + rdn.nextInt(10) + 6;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 = correctAnswer + rdn.nextInt(15) + 16;
+                break;
+            }
 
-        if (combination == 2 )
-        {
-            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1 ;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
-        }
+            case 1:{
+                option1 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1;
+                option2 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+                option3 =(int)correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
+                break;
+            }
 
-        if (combination == 3 )
-        {
-            option1 = correctAnswer + rdn.nextInt(20) + 6;
-            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
-            option3 = correctAnswer + rdn.nextInt(50) + 26;
+            case 2:{
+                option1 = (int)correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1 ;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 = (int)correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
+
+                break;
+            }
+
+            case 3:{
+                option1 = correctAnswer + rdn.nextInt(20) + 6;
+                option2 = (int)correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+                option3 = correctAnswer + rdn.nextInt(50) + 26;
+                break;
+            }
+            
+            default:{
+                JOptionPane.showConfirmDialog(null,"Hubo un error en la variable COMBINATION, porfavor reporte este problema","ERROR",JOptionPane.CLOSED_OPTION);
+                break;
+            }
         }
-        
         
         
 
@@ -566,32 +597,40 @@ public class Pregunta {
         
         //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
         //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
-        if (combination == 0 )
-        {
-            option1 = correctAnswer + rdn.nextInt(10) + 6;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer + rdn.nextInt(15) + 16;
-        }
 
-        if (combination == 1 )
-        {
-            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1;
-            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
-            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
-        }
+        switch (combination){
+            case 0:{
+                option1 = correctAnswer + rdn.nextInt(10) + 6;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 = correctAnswer + rdn.nextInt(15) + 16;
+            break;
+            }
 
-        if (combination == 2 )
-        {
-            option1 = correctAnswer - rdn.nextInt((correctAnswer/3)) - 1 ;
-            option2 = correctAnswer + rdn.nextInt(5) + 1;
-            option3 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (2 * (correctAnswer/3));
-        }
+            case 1:{
+                option1 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1;
+                option2 =(int)correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+                option3 =(int)correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
+                break;
+            }
 
-        if (combination == 3 )
-        {
-            option1 = correctAnswer + rdn.nextInt(20) + 6;
-            option2 = correctAnswer - rdn.nextInt((correctAnswer/3)) - (correctAnswer/3);
-            option3 = correctAnswer + rdn.nextInt(50) + 26;
+            case 2:{
+                option1 = (int)correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - 1 ;
+                option2 = correctAnswer + rdn.nextInt(5) + 1;
+                option3 =(int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (2 * (correctAnswer/3));
+                break;
+            }
+
+            case 3:{
+                option1 = correctAnswer + rdn.nextInt(20) + 6;
+                option2 = (int) correctAnswer - rdn.nextInt((int)(correctAnswer/3)) - (correctAnswer/3);
+                option3 = correctAnswer + rdn.nextInt(50) + 26;
+                break;
+            }
+            
+            default:{
+                JOptionPane.showConfirmDialog(null,"Hubo un error en la variable COMBINATION, porfavor reporte este problema","ERROR",JOptionPane.CLOSED_OPTION);
+                break;
+            }
         }
         
         
@@ -606,5 +645,200 @@ public class Pregunta {
         
         //retorno el vector
         return questionType7;
+    }
+    
+    public String[] preguntaTipo8(){
+        
+        String[] questionType8 = new String[5];
+        int x= rdn.nextInt(31) - 15;
+        int y= rdn.nextInt(31) - 15;
+        int combination1 = rdn.nextInt(4);
+        int combination2 = rdn.nextInt(4);
+        int coefficientX1 = rdn.nextInt(21) - 10;
+        int coefficientY1 = rdn.nextInt(21) - 10;
+        int coefficientX2 = rdn.nextInt(21) - 10;
+        int coefficientY2 = rdn.nextInt(21) - 10;
+        int independentTerm1 = (x*coefficientX1) + (y*coefficientY1);
+        int independentTerm2 = (x*coefficientX2) + (y*coefficientY2);
+        int optionX1=0;
+        int optionX2=0;
+        int optionX3=0;
+        int optionY1=0;
+        int optionY2=0;
+        int optionY3=0;
+        String correctAnswer = "X = " + x + ", Y =" + y;
+        String option1="";
+        String option2="";
+        String option3="";
+        String equation1="";        
+        String equation2="";        
+        
+        //Controlo el caso en el que ambos coeficiente son 0, lo que 
+        if((coefficientX1==0) && (coefficientY1==0)){
+            coefficientX1 = 1;
+        }
+        if((coefficientX2==0) && (coefficientY2==0)){
+            coefficientX2 = 1;
+        }
+        
+        //Evito que los coeficioentes sean iguales para evitar el caso de generar dos ecuaciones iguales y 
+        //el sistema no tenga solucionque 
+        if(coefficientX1==coefficientX2){
+            coefficientX1++;
+        }
+        if(coefficientY1==coefficientY2){
+            coefficientY1++;
+        }
+
+        //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
+        //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
+        switch (combination1){
+            case 0:{
+                optionX1 = x + rdn.nextInt(6) + 4;
+                optionX2 = x + rdn.nextInt(3) + 1;
+                optionX3 = x + rdn.nextInt(10) + 10;
+                break;
+            }
+        
+
+            case 1:{
+                optionX1 =(int) x + rdn.nextInt(6) - 4;
+                optionX2 =(int) x + rdn.nextInt(3) - 1;
+                optionX3 =(int) x + rdn.nextInt(10) - 10;
+                break;
+            }
+            
+            case 2:{
+                optionX1 = (int)x - rdn.nextInt(3) - 1 ;
+                optionX2 = x + rdn.nextInt(5) + 1;
+                optionX3 =(int) x - rdn.nextInt(6) - 4;
+                break;
+            }
+
+            case 3:{
+                optionX1 = x + rdn.nextInt(20) + 6;
+                optionX2 = (int) x - rdn.nextInt(3) - 1;
+                optionX3 = x + rdn.nextInt(50) + 26;
+                break;
+            }
+            default:{
+                JOptionPane.showConfirmDialog(null,"Hubo un error en la variable COMBINATION1, porfavor reporte este problema","ERROR",JOptionPane.CLOSED_OPTION);
+                break;
+            }
+        }
+
+        //Con base en un valor aleatorio generado con cuatro posibles valores:0,1,2,3
+        //se les asignará a las variables option un valor por encima o por debajo de la respuesa correcta
+        switch (combination2){
+            case 0:{
+            optionY1 = y + rdn.nextInt(6) + 4;
+            optionY2 = y + rdn.nextInt(3) + 1;
+            optionY3 = y + rdn.nextInt(10) + 10;
+            break;
+            }
+
+            case 1:{
+                optionY1 =(int) y - rdn.nextInt(6) - 4;
+                optionY2 =(int) y - rdn.nextInt(3) - 1;
+                optionY3 =(int) y - rdn.nextInt(10) - 10;
+                break;
+            }
+
+            case 2:{
+                optionY1 =(int) y - rdn.nextInt(3) - 1 ;
+                optionY2 = y + rdn.nextInt(5) + 1;
+                optionY3 =(int) y - rdn.nextInt(6) - 4;
+                break;
+            }
+
+            case 3:{
+                optionY1 = y + rdn.nextInt(20) + 6;
+                optionY2 = (int) y - rdn.nextInt(3) - 1;
+                optionY3 = y + rdn.nextInt(50) + 26;
+                break;
+            }
+            
+            default:{
+                JOptionPane.showConfirmDialog(null,"Hubo un error en la variable COMBINATION2, porfavor reporte este problema","ERROR",JOptionPane.CLOSED_OPTION);
+                break;
+            }
+        }
+        
+        //Segun el signo de los terminos independientes, la ecuacion se escribe de una manera u otra
+        if((coefficientX1>0) && (coefficientY1<0)){
+            equation1 = "" + coefficientX1 + "X - " + Math.abs(coefficientY1) + "Y = " + independentTerm1 ;
+        }
+        
+        if((coefficientX1<0) && (coefficientY1>0)){
+            equation1 = "- " + Math.abs(coefficientX1) + "X + " + coefficientY1 + "Y = " + independentTerm1 ;
+        }
+        
+        if((coefficientX2>0) && (coefficientY2<0)){
+            equation2 = "" + coefficientX2 + "X - " + Math.abs(coefficientY2) + "Y = " + independentTerm2 ;
+        }
+        
+        if((coefficientX2<0) && (coefficientY2>0)){
+            equation2 = "- " + Math.abs(coefficientX2) + "X + " + coefficientY2 + "Y = " + independentTerm2 ;
+        }
+        
+        if((coefficientX1<0) && (coefficientY1<0)){
+            equation1 = "- " + Math.abs(coefficientX1) + "X - " + Math.abs(coefficientY1) + "Y = " + independentTerm1 ;
+        }
+        
+        if((coefficientX1>0) && (coefficientY1>0)){
+            equation1 = "" + coefficientX1 + "X + " + coefficientY1 + "Y = " + independentTerm1 ;
+        }
+        
+        if((coefficientX2<0) && (coefficientY2<0)){
+            equation2 = "- " + Math.abs(coefficientX2) + "X - " + Math.abs(coefficientY2) + "Y = " + independentTerm2 ;
+        }
+        
+        if((coefficientX2>0) && (coefficientY2>0)){
+            equation2 = "" + coefficientX2 + "X + " + coefficientY2 + "Y = " + independentTerm2 ;
+        }
+        
+        if((coefficientX1==0) && (coefficientY1<0)){
+            equation1= "- " + Math.abs(coefficientY1)+ "Y = " + independentTerm1; 
+        }
+        
+        if((coefficientX1==0) && (coefficientY1>0)){
+            equation1=coefficientY1+ "Y = " + independentTerm1; 
+        }
+        
+        if((coefficientY1==0) && (coefficientX1<0)){
+            equation1= "- " + Math.abs(coefficientX1)+ "X = " + independentTerm1; 
+        }
+        
+        if((coefficientY1==0) && (coefficientX1>0)){
+            equation1=coefficientX1+ "X = " + independentTerm1; 
+        }
+        
+        if((coefficientX2==0) && (coefficientY2<0)){
+            equation2= "- " + Math.abs(coefficientY2)+ "Y = " + independentTerm2; 
+        }
+        
+        if((coefficientX2==0) && (coefficientY2>0)){
+            equation2=coefficientY2+ "Y = " + independentTerm2; 
+        }
+        
+        if((coefficientY2==0) && (coefficientX2<0)){
+            equation2= "- " + Math.abs(coefficientX2)+ "X = " + independentTerm2; 
+        }
+        
+        if((coefficientY2==0) && (coefficientX2>0)){
+            equation2=coefficientX2+ "X = " + independentTerm2; 
+        }
+        
+        option1 = "X = " + optionX1 + ", Y =" + optionY1;
+        option2 = "X = " + optionX2 + ", Y =" + optionY2;
+        option3 = "X = " + optionX3 + ", Y =" + optionY3;
+        
+        questionType8[0]= "<html><p>En cuentre los valores para X y Y en los que en ambas ecuaciones se cumpla la igualdad<br/>" + equation1 + " <br/>" + equation2 + "<p><html>";
+        questionType8[1]= correctAnswer;
+        questionType8[2]=option1;
+        questionType8[3]=option2;
+        questionType8[4]=option3;
+        //retorno el vector
+        return questionType8;
     }
 }
