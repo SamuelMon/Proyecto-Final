@@ -382,6 +382,11 @@ public class Board extends javax.swing.JFrame {
                     //Si solo hay un jugador se muestra el tiempo y los puntos que consiguió
                     JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>Puntaje: " + points);
                 }
+                jMenuBar1.setVisible(true);
+                if (JOptionPane.showConfirmDialog(null, "<html>¿Desea iniciar un nuevo juego?", "Nuevo Juego", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    IniciarNuevoJuego nuevo = new IniciarNuevoJuego(this, true);
+                    nuevo.setVisible(true);
+                }
             } else {
                 //Si el juego no se ha acabado, habilito la siguiente tirada
                 rollDice.setEnabled(true);
@@ -447,6 +452,7 @@ public class Board extends javax.swing.JFrame {
         responder.setEnabled(true);
         hint.setEnabled(true);
         playerTurn.setVisible(false);
+        jMenuBar1.setVisible(false);
     }
 
     public void multiplayer(int num) {
@@ -469,6 +475,7 @@ public class Board extends javax.swing.JFrame {
         rollDice.setEnabled(true);
         responder.setEnabled(true);
         hint.setEnabled(true);
+        jMenuBar1.setVisible(false);
     }
 
     //Método para crear el tablero
@@ -499,7 +506,7 @@ public class Board extends javax.swing.JFrame {
         time.setVisible(true);
         rollDice.setVisible(true);
         //Compruebo si se habilitaron los dos jugadores para mostrar o no el segundo puntaje
-        
+
     }
 
     //Método de cronómetro
@@ -612,7 +619,7 @@ public class Board extends javax.swing.JFrame {
                     question = type.preguntaTipo7();
                     hint.setVisible(false);
                     break;
-                case 8: 
+                case 8:
                     question = type.preguntaTipo8();
                     hint.setVisible(false);
                     break;
