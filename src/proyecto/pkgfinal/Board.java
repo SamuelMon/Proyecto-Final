@@ -35,12 +35,10 @@ public class Board extends javax.swing.JFrame {
     //Establezco el estado inicial de los componentes de la parte gráfica
     public Board() {
         initComponents();
-        puntaje.setText("Puntaje J1: " + String.valueOf(points));
-        puntaje2.setText("Puntaje J2: " + String.valueOf(points2));
+        puntaje.setText("Puntaje: " + String.valueOf(points));
         imageButton = new ImageIcon("src/imagenes/dado1.png");
         rollDice.setIcon(imageButton);
         puntaje.setVisible(false);
-        puntaje2.setVisible(false);
         time.setVisible(false);
         rollDice.setVisible(false);
         responder.setVisible(false);
@@ -82,7 +80,6 @@ public class Board extends javax.swing.JFrame {
         time = new javax.swing.JLabel();
         help = new javax.swing.JLabel();
         hint = new javax.swing.JButton();
-        puntaje2 = new javax.swing.JLabel();
         playerTurn = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -130,8 +127,6 @@ public class Board extends javax.swing.JFrame {
             }
         });
 
-        puntaje2.setText("Puntaje 2");
-
         playerTurn.setText("Turno: J1");
 
         jMenu1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -159,7 +154,6 @@ public class Board extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(puntaje)
                     .addComponent(time)
-                    .addComponent(puntaje2)
                     .addComponent(playerTurn)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(rollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,9 +187,7 @@ public class Board extends javax.swing.JFrame {
                         .addComponent(time)
                         .addGap(18, 18, 18)
                         .addComponent(puntaje)
-                        .addGap(18, 18, 18)
-                        .addComponent(puntaje2)
-                        .addGap(18, 18, 18)
+                        .addGap(52, 52, 52)
                         .addComponent(playerTurn)
                         .addGap(74, 74, 74)
                         .addComponent(rollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -359,7 +351,6 @@ public class Board extends javax.swing.JFrame {
                 }
                 //Se muestran los puntajes actuales luego de haber respondido
                 puntaje.setText("Puntaje J1: " + points);
-                puntaje2.setText("Puntaje J2: " + points2);
             } else {
                 //Este es el caso de si el juego se inició con un solo jugador
                 //Igual que con los dos jugadores se comprueba si acertó la pregunta y suma o resta puntos
@@ -455,7 +446,6 @@ public class Board extends javax.swing.JFrame {
         rollDice.setEnabled(true);
         responder.setEnabled(true);
         hint.setEnabled(true);
-        puntaje2.setVisible(false);
         playerTurn.setVisible(false);
     }
 
@@ -473,8 +463,7 @@ public class Board extends javax.swing.JFrame {
         createBoard(totalPos);
         //Pinto la posicion inicial de ambos jugadores
         lista.get(actualPos).setBackground(Color.magenta);
-        puntaje.setVisible(true);
-        puntaje2.setVisible(true);
+        puntaje.setVisible(false);
         playerTurn.setVisible(true);
         state = true;
         rollDice.setEnabled(true);
@@ -510,9 +499,7 @@ public class Board extends javax.swing.JFrame {
         time.setVisible(true);
         rollDice.setVisible(true);
         //Compruebo si se habilitaron los dos jugadores para mostrar o no el segundo puntaje
-        if (player2 == true) {
-            puntaje2.setVisible(true);
-        }
+        
     }
 
     //Método de cronómetro
@@ -584,7 +571,7 @@ public class Board extends javax.swing.JFrame {
         //Primero compruebo que es número que me enviaron mas el avance no se salga de la tabla
         if (pos + adv < totalPos) {
             //Se crea un número aleatorio que determina el tipo de pregunta
-            int qstn = rdm.nextInt(7) + 1;
+            int qstn = rdm.nextInt(8) + 1;
             //Se crean los diferentes casos para qstn
             //Para algunos se habilita el botón de ayuda y se configura una imagen que se 
             //muestra al presionar el botón
@@ -623,6 +610,10 @@ public class Board extends javax.swing.JFrame {
                     break;
                 case 7:
                     question = type.preguntaTipo7();
+                    hint.setVisible(false);
+                    break;
+                case 8: 
+                    question = type.preguntaTipo8();
                     hint.setVisible(false);
                     break;
             }
@@ -720,7 +711,6 @@ public class Board extends javax.swing.JFrame {
     private javax.swing.JLabel playerTurn;
     private javax.swing.JLabel pregunta;
     private javax.swing.JLabel puntaje;
-    private javax.swing.JLabel puntaje2;
     private javax.swing.JButton responder;
     private javax.swing.JButton rollDice;
     private javax.swing.JLabel time;

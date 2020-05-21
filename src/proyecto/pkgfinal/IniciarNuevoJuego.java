@@ -6,7 +6,6 @@
 package proyecto.pkgfinal;
 
 import java.awt.event.KeyEvent;
-import static java.lang.Thread.sleep;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +14,6 @@ import javax.swing.JOptionPane;
  */
 public class IniciarNuevoJuego extends javax.swing.JDialog {
 
-    public boolean state = true;
     public int num;
     public Board padre;
 

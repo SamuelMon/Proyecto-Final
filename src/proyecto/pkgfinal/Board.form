@@ -51,7 +51,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="puntaje" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="time" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="puntaje2" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="playerTurn" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="rollDice" min="-2" pref="85" max="-2" attributes="0"/>
@@ -94,9 +93,7 @@
                       <Component id="time" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="puntaje" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="puntaje2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       <Component id="playerTurn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Component id="rollDice" min="-2" pref="85" max="-2" attributes="0"/>
@@ -209,11 +206,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hintActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="puntaje2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Puntaje 2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="playerTurn">
       <Properties>
