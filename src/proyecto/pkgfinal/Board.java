@@ -85,6 +85,7 @@ public class Board extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         panel.setLayout(new java.awt.GridLayout(0, 5));
         jScrollPane1.setViewportView(panel);
