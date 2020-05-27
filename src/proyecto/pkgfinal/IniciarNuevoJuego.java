@@ -27,6 +27,7 @@ public class IniciarNuevoJuego extends javax.swing.JDialog {
         jLabel4.setVisible(false);
         sizeBoard.setVisible(false);
         padre = (Board) parent;
+        sizeBoard.setTransferHandler(null);
     }
 
     /**
