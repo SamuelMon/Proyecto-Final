@@ -41,7 +41,7 @@ public class Pregunta {
     Cual de los siguientes es el Volumen de la caja con lados a="Inserte a", b="Inserte b" y c="Inserte c"?
 
     Tipo 6
-    Cual es el area de el cuadrado con lados a=""insertar a" y b="insertar b" 
+    Cual es el area de el rectangulo con lados a=""insertar a" y b="insertar b" 
     
     Tipo 7
     Cual es el area de el circulo con r="insertar r"
@@ -526,7 +526,7 @@ public class Pregunta {
         int b = rdn.nextInt(10)+10;
         int a = rdn.nextInt(25)+10;
         int combination = rdn.nextInt(4);
-        String question ="<html><p>Cual de los siguientes es el area del cuadrado con:<br/> a= " + a + " m" + ", b= " + b + "m</p></html>";
+        String question ="<html><p>Cual de los siguientes es el area del rectangulo con:<br/> a= " + a + " m" + ", b= " + b + "m</p></html>";
         int correctAnswer = a*b;
         int option1 = 0;
         int option2 = 0;
