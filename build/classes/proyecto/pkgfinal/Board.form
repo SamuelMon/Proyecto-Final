@@ -59,27 +59,20 @@
                   </Group>
               </Group>
               <Component id="jScrollPane1" min="-2" pref="342" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="option2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="option4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                              <Component id="responder" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="hint" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="option3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="option1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="pregunta" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="pregunta" min="-2" max="-2" attributes="0"/>
+                  <Component id="option2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="option4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="option3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="option1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Component id="help" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
+                      <Component id="responder" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="hint" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="help" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="38" max="32767" attributes="0"/>
           </Group>

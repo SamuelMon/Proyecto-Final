@@ -165,12 +165,12 @@ public class IniciarNuevoJuego extends javax.swing.JDialog {
             num = 30;
             if (onePlayer.isSelected()) {
                 padre.singleplayer(num);
-                JOptionPane.showMessageDialog(null, "Intenta hacer el mayor número de puntos en el menor tiempo.");
                 this.dispose();
+                JOptionPane.showMessageDialog(null, "Intenta hacer el mayor número de puntos en el menor tiempo.");
             } else if (twoPlayers.isSelected()) {
                 padre.multiplayer(num);
-                JOptionPane.showMessageDialog(null, "El ganador será el jugador que responda primero la pregunta de la última casilla.");
                 this.dispose();
+                JOptionPane.showMessageDialog(null, "El ganador será el jugador que responda primero la pregunta de la última casilla.");
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor seleccione una de las opciones para el número de jugadores");
             }
@@ -184,12 +184,12 @@ public class IniciarNuevoJuego extends javax.swing.JDialog {
                 } else {
                     if (onePlayer.isSelected()) {
                         padre.singleplayer(num);
-                        JOptionPane.showMessageDialog(null, "Intenta hacer el mayor número de puntos en el menor tiempo.");
                         this.dispose();
+                        JOptionPane.showMessageDialog(null, "Intenta hacer el mayor número de puntos en el menor tiempo.");
                     } else if (twoPlayers.isSelected()) {
                         padre.multiplayer(num);
-                        JOptionPane.showMessageDialog(null, "El ganador será el jugador que responda primero la pregunta de la última casilla.");
                         this.dispose();
+                        JOptionPane.showMessageDialog(null, "El ganador será el jugador que responda primero la pregunta de la última casilla.");
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor seleccione una de las opciones para el número de jugadores");
                     }

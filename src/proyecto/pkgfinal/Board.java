@@ -160,23 +160,19 @@ public class Board extends javax.swing.JFrame {
                         .addComponent(rollDice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pregunta)
+                    .addComponent(option2)
+                    .addComponent(option4)
+                    .addComponent(option3)
+                    .addComponent(option1)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(responder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(option2)
-                            .addComponent(option4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(responder)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hint))
-                            .addComponent(option3)
-                            .addComponent(option1)
-                            .addComponent(pregunta)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(help)))
+                        .addComponent(hint))
+                    .addComponent(help))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -401,7 +397,8 @@ public class Board extends javax.swing.JFrame {
             pregunta.setVisible(false);
             help.setVisible(false);
             hint.setVisible(false);
-            //Lismpio la seleccion y el orden de las opciones
+            change = false;
+            //Limpio la seleccion y el orden de las opciones
             optionList.clear();
             answers.clearSelection();
             //Cambio el turno
@@ -532,7 +529,6 @@ public class Board extends javax.swing.JFrame {
                                 min++;
                             }
                             //Hago ciertas comprobaciones para que se vea de una forma u otra
-                            //En verdad esto es innicesario pero considero que asi se ve mejor
                             if (seg < 10 && min < 10) {
                                 time.setText("0" + min + ":0" + seg);
                             } else if (min < 10) {
@@ -614,11 +610,15 @@ public class Board extends javax.swing.JFrame {
                     break;
                 case 6:
                     question = type.preguntaTipo6();
-                    hint.setVisible(false);
+                    hint.setVisible(true);
+                    imageHelp = new ImageIcon("src/imagenes/formulaAreaRectangulo.jpg");
+                    help.setIcon(imageHelp);
                     break;
                 case 7:
                     question = type.preguntaTipo7();
-                    hint.setVisible(false);
+                     hint.setVisible(true);
+                    imageHelp = new ImageIcon("src/imagenes/formulaAreaCirculo.png");
+                    help.setIcon(imageHelp);
                     break;
                 case 8:
                     question = type.preguntaTipo8();
