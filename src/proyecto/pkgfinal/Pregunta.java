@@ -390,7 +390,7 @@ public class Pregunta {
         int radio = rdn.nextInt(10)+1;
         int height = rdn.nextInt(15)+1;
         int combination = rdn.nextInt(4);
-        String question ="<html><p>Cual de los siguientes es el volumen del cilindro con:<br/> r= " + radio + " m" + ", h= " + height + "m</p></html>";
+        String question ="<html><p>Cual de los siguientes es el volumen del cilindro con radio de base:<br/> r= " + radio + " m y altura" + ", h= " + height + "m</p></html>";
         int correctAnswer =(int) (Math.pow(radio,2) * height);
         int option1 = 0;
         int option2 = 0;
@@ -526,7 +526,7 @@ public class Pregunta {
         int b = rdn.nextInt(10)+10;
         int a = rdn.nextInt(25)+10;
         int combination = rdn.nextInt(4);
-        String question ="<html><p>Cual de los siguientes es el area del rectangulo con:<br/> a= " + a + " m" + ", b= " + b + "m</p></html>";
+        String question ="<html><p>Cual de los siguientes es el area del rectangulo con lados:<br/> a= " + a + " m" + ", b= " + b + "m</p></html>";
         int correctAnswer = a*b;
         int option1 = 0;
         int option2 = 0;
@@ -589,7 +589,7 @@ public class Pregunta {
         String[] questionType7 = new String[5];
         int r = rdn.nextInt(25)+15;
         int combination = rdn.nextInt(4);
-        String question ="<html><p>Cual de los siguientes es el area del circulo con:<br/> r= " + r + " m</p></html>";
+        String question ="<html><p>Cual de los siguientes es el area del circulo con radio:<br/> r= " + r + " m</p></html>";
         int correctAnswer = (int)Math.pow(r, 2);
         int option1 = 0;
         int option2 = 0;
@@ -833,7 +833,7 @@ public class Pregunta {
         option2 = "X = " + optionX2 + ", Y =" + optionY2;
         option3 = "X = " + optionX3 + ", Y =" + optionY3;
         
-        questionType8[0]= "<html><p>En cuentre los valores para X y Y en los que en ambas ecuaciones se cumpla la igualdad<br/>" + equation1 + " <br/>" + equation2 + "<p><html>";
+        questionType8[0]= "<html><p>Encuentre los valores para X y Y en los que en ambas ecuaciones se cumpla la igualdad<br/>" + equation1 + " <br/>" + equation2 + "<p><html>";
         questionType8[1]= correctAnswer;
         questionType8[2]=option1;
         questionType8[3]=option2;
