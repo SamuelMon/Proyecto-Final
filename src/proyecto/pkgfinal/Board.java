@@ -254,7 +254,7 @@ public class Board extends javax.swing.JFrame {
             //Se comprueba el turno actual. En caso de ser falso, es el turno del jugador uno.
             if (turno == false) {
                 //Se "limpia" la posicion actual
-                lista.get(actualPos).setBackground(Color.yellow);
+                lista.get(actualPos).setBackground(Color.decode("#F1F1F1"));
                 //Se comprueba que con el número sacado no se salga del tablero
                 //Y se cambia el turno en caso de ser asi
                 if (advancePosition(actualPos) == -1) {
@@ -266,7 +266,7 @@ public class Board extends javax.swing.JFrame {
                 }
             } else {
                 //Este caso es igual que el anterior pero para el jugador dos
-                lista.get(player2Pos).setBackground(Color.yellow);
+                lista.get(player2Pos).setBackground(Color.decode("#F1F1F1"));
                 if (advancePosition(player2Pos) == -1) {
                     turno = !turno;
                     playerTurn.setText("Turno: J1");
@@ -277,22 +277,22 @@ public class Board extends javax.swing.JFrame {
             //Se comparan las posiciones de ambos jugadores
             if (player2Pos == actualPos) {
                 //Si es igual se pinta esa posicion de un color diferente
-                lista.get(actualPos).setBackground(Color.magenta);
+                lista.get(actualPos).setBackground(Color.decode("#FF59F2"));
             } else {
                 //Sino se pintan ambos por separado
-                lista.get(player2Pos).setBackground(Color.blue);
-                lista.get(actualPos).setBackground(Color.red);
+                lista.get(player2Pos).setBackground(Color.decode("#415EFF"));
+                lista.get(actualPos).setBackground(Color.decode("#FF4343"));
             }
 
         } else {
             //El caso para un jugador funciona igual que el caso para dos
             //Pero no hay necesidad de hacer la comprobación de turno asi que solo se pinta la posición donde caiga
-            lista.get(actualPos).setBackground(Color.yellow);
+            lista.get(actualPos).setBackground(Color.decode("#F1F1F1"));
             if (advancePosition(actualPos) == -1) {
-                lista.get(actualPos).setBackground(Color.red);
+                lista.get(actualPos).setBackground(Color.decode("#FF4343"));
             } else {
                 actualPos = advancePosition(actualPos);
-                lista.get(actualPos).setBackground(Color.red);
+                lista.get(actualPos).setBackground(Color.decode("#FF4343"));
             }
         }
     }//GEN-LAST:event_rollDiceActionPerformed
@@ -321,7 +321,7 @@ public class Board extends javax.swing.JFrame {
                     } else {
                         //Sino se le restan 150 y se le retrocede la mitad del avance
                         points = points - 150;
-                        lista.get(actualPos).setBackground(Color.yellow);
+                        lista.get(actualPos).setBackground(Color.decode("#F1F1F1"));
                         actualPos = (int) (actualPos - Math.ceil(adv / 2));
                     }
                     //Se cambia el texto que muestra el turno actual
@@ -333,7 +333,7 @@ public class Board extends javax.swing.JFrame {
                         points2 = points2 + 100;
                     } else {
                         points2 = points2 - 150;
-                        lista.get(player2Pos).setBackground(Color.yellow);
+                        lista.get(player2Pos).setBackground(Color.decode("#F1F1F1"));
                         player2Pos = (int) (player2Pos - Math.ceil(adv / 2));
 
                     }
@@ -341,10 +341,10 @@ public class Board extends javax.swing.JFrame {
                 }
                 //Se comprueban sus posiciones y se pintan.
                 if (actualPos == player2Pos) {
-                    lista.get(player2Pos).setBackground(Color.magenta);
+                    lista.get(player2Pos).setBackground(Color.decode("#FF59F2"));
                 } else {
-                    lista.get(player2Pos).setBackground(Color.blue);
-                    lista.get(actualPos).setBackground(Color.red);
+                    lista.get(player2Pos).setBackground(Color.decode("#415EFF"));
+                    lista.get(actualPos).setBackground(Color.decode("#FF4343"));
                 }
                 //Se muestran los puntajes actuales luego de haber respondido
                 puntaje.setText("Puntaje J1: " + points);
@@ -355,9 +355,9 @@ public class Board extends javax.swing.JFrame {
                     points = points + 100;
                 } else {
                     points = points - 150;
-                    lista.get(actualPos).setBackground(Color.yellow);
+                    lista.get(actualPos).setBackground(Color.decode("#F1F1F1"));
                     actualPos = (int) (actualPos - Math.ceil(adv / 2));
-                    lista.get(actualPos).setBackground(Color.red);
+                    lista.get(actualPos).setBackground(Color.decode("#FF4343"));
                 }
                 //Se actualiza el mensaje de los puntos
                 puntaje.setText("Puntaje: " + points);
@@ -383,6 +383,9 @@ public class Board extends javax.swing.JFrame {
                 if (JOptionPane.showConfirmDialog(null, "<html>¿Desea iniciar un nuevo juego?", "Nuevo Juego", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     IniciarNuevoJuego nuevo = new IniciarNuevoJuego(this, true);
                     nuevo.setVisible(true);
+                }
+                else{
+                    System.exit(0);
                 }
             } else {
                 //Si el juego no se ha acabado, habilito la siguiente tirada
@@ -443,7 +446,7 @@ public class Board extends javax.swing.JFrame {
         //Llamo al método para crear el tablero
         createBoard(totalPos);
         //Marco la posicion inicial con un color diferente
-        lista.get(actualPos).setBackground(Color.red);
+        lista.get(actualPos).setBackground(Color.decode("#FF4343"));
         puntaje.setText("Puntaje: " + points);
         state = true;
         rollDice.setEnabled(true);
@@ -466,7 +469,7 @@ public class Board extends javax.swing.JFrame {
         //Creo el tablero con el método createBoard
         createBoard(totalPos);
         //Pinto la posicion inicial de ambos jugadores
-        lista.get(actualPos).setBackground(Color.magenta);
+        lista.get(actualPos).setBackground(Color.decode("#FF59F2"));
         puntaje.setVisible(false);
         playerTurn.setVisible(true);
         state = true;
@@ -483,7 +486,7 @@ public class Board extends javax.swing.JFrame {
             //Creo un nuevo label y le asigno su posicion como nombre/texto.
             JLabel label = new JLabel(String.valueOf(i + 1));
             //Le pinto el fondo de amarillo y lo configuro como opaque para que se vea el color
-            label.setBackground(Color.yellow);
+            label.setBackground(Color.decode("#F1F1F1"));
             label.setOpaque(true);
             //Configuro su texto en el centro
             label.setHorizontalAlignment(0);
