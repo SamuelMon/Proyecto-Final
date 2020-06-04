@@ -35,6 +35,7 @@ public class Board extends javax.swing.JFrame {
     //Establezco el estado inicial de los componentes de la parte gráfica
     public Board() {
         initComponents();
+        this.getContentPane().setBackground(Color.decode("#BCFFFA"));
         puntaje.setText("Puntaje: " + String.valueOf(points));
         imageButton = new ImageIcon("src/imagenes/dado1.png");
         rollDice.setIcon(imageButton);
