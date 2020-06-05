@@ -531,6 +531,7 @@ public class Board extends javax.swing.JFrame {
         puntaje.setVisible(true);
         time.setVisible(true);
         rollDice.setVisible(true);
+        newGame.setVisible(false);
         //Compruebo si se habilitaron los dos jugadores para mostrar o no el segundo puntaje
 
     }
