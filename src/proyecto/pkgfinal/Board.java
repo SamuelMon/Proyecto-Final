@@ -27,7 +27,7 @@ public class Board extends javax.swing.JFrame {
     public boolean state = true, change = false, player2 = false, turno = false;
     public ArrayList<Integer> optionList = new ArrayList<>();
     public Random rdm = new Random();
-    public ImageIcon imageHelp, imageButton;
+    public ImageIcon imageHelp, imageButton = new ImageIcon("src/imagenes/dado1.png");
 
     /**
      * Creates new form Board
@@ -37,7 +37,6 @@ public class Board extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.decode("#BCFFFA"));
         puntaje.setText("Puntaje: " + String.valueOf(points));
-        imageButton = new ImageIcon("src/imagenes/dado1.png");
         rollDice.setIcon(imageButton);
         puntaje.setVisible(false);
         time.setVisible(false);
@@ -52,6 +51,7 @@ public class Board extends javax.swing.JFrame {
         hint.setVisible(false);
         playerTurn.setVisible(false);
         state = false;
+        panel.setVisible(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         IniciarNuevoJuego nuevo = new IniciarNuevoJuego(this, true);
@@ -82,8 +82,7 @@ public class Board extends javax.swing.JFrame {
         help = new javax.swing.JLabel();
         hint = new javax.swing.JButton();
         playerTurn = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        newGame = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -91,6 +90,7 @@ public class Board extends javax.swing.JFrame {
         panel.setLayout(new java.awt.GridLayout(0, 5));
         jScrollPane1.setViewportView(panel);
 
+        rollDice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dado1.png"))); // NOI18N
         rollDice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rollDiceActionPerformed(evt);
@@ -101,12 +101,15 @@ public class Board extends javax.swing.JFrame {
 
         answers.add(option1);
         option1.setText("Opcion1");
+        option1.setOpaque(false);
 
         answers.add(option2);
         option2.setText("Opcion 2");
+        option2.setOpaque(false);
 
         answers.add(option3);
         option3.setText("Opcion 3");
+        option3.setOpaque(false);
 
         responder.setText("Responder");
         responder.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +120,7 @@ public class Board extends javax.swing.JFrame {
 
         answers.add(option4);
         option4.setText("Opcion 4");
+        option4.setOpaque(false);
 
         pregunta.setText("Pregunta");
 
@@ -131,21 +135,13 @@ public class Board extends javax.swing.JFrame {
 
         playerTurn.setText("Turno: J1");
 
-        jMenu1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu1.setText("Nuevo Juego");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        newGame.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        newGame.setText("Nuevo Juego");
+        newGame.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
+                newGameMouseClicked(evt);
             }
         });
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,24 +159,33 @@ public class Board extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pregunta)
-                    .addComponent(option2)
-                    .addComponent(option4)
-                    .addComponent(option3)
-                    .addComponent(option1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(responder)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hint))
-                    .addComponent(help))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(newGame, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(option4)
+                                    .addComponent(option3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(responder)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(hint))
+                                    .addComponent(pregunta)
+                                    .addComponent(option2))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(7, 7, 7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(help)
+                            .addComponent(option1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(time)
                         .addGap(18, 18, 18)
@@ -194,7 +199,7 @@ public class Board extends javax.swing.JFrame {
                         .addComponent(pregunta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(help)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(option1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(option2)
@@ -205,8 +210,10 @@ public class Board extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(hint)
-                            .addComponent(responder))))
-                .addContainerGap(11, Short.MAX_VALUE))
+                            .addComponent(responder))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newGame, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -380,13 +387,16 @@ public class Board extends javax.swing.JFrame {
                     //Si solo hay un jugador se muestra el tiempo y los puntos que consiguió
                     JOptionPane.showMessageDialog(null, "<html>Fin del juego.<br/>Tiempo: " + time.getText() + "<br/>Puntaje: " + points);
                 }
-                jMenuBar1.setVisible(true);
                 if (JOptionPane.showConfirmDialog(null, "<html>¿Desea iniciar un nuevo juego?", "Nuevo Juego", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     IniciarNuevoJuego nuevo = new IniciarNuevoJuego(this, true);
                     nuevo.setVisible(true);
+                    newGame.setVisible(true);
                 }
                 else{
-                    System.exit(0);
+                    this.dispose();
+                    Inicio volver = new Inicio();
+                    volver.setVisible(true);
+                    volver.setLocationRelativeTo(this);
                 }
             } else {
                 //Si el juego no se ha acabado, habilito la siguiente tirada
@@ -418,11 +428,7 @@ public class Board extends javax.swing.JFrame {
         help.setVisible(change);
     }//GEN-LAST:event_hintActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+    private void newGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newGameMouseClicked
         // TODO add your handling code here:
         state = false;
         rollDice.setEnabled(false);
@@ -434,7 +440,7 @@ public class Board extends javax.swing.JFrame {
         turno = false;
         IniciarNuevoJuego nuevo = new IniciarNuevoJuego(this, true);
         nuevo.setVisible(true);
-    }//GEN-LAST:event_jMenu1MouseClicked
+    }//GEN-LAST:event_newGameMouseClicked
 
     public void singleplayer(int num) {
         //Limpio el panel existente para cuando se quiera reiniciar el juego, asi como la lista de labels.
@@ -454,7 +460,7 @@ public class Board extends javax.swing.JFrame {
         responder.setEnabled(true);
         hint.setEnabled(true);
         playerTurn.setVisible(false);
-        jMenuBar1.setVisible(false);
+        newGame.setVisible(false);
     }
 
     public void multiplayer(int num) {
@@ -477,12 +483,13 @@ public class Board extends javax.swing.JFrame {
         rollDice.setEnabled(true);
         responder.setEnabled(true);
         hint.setEnabled(true);
-        jMenuBar1.setVisible(false);
+        newGame.setVisible(false);
     }
 
     //Método para crear el tablero
     public void createBoard(int boardSquares) {
         //Inicio un ciclo hasta el total de posiciones que le envié al método
+        panel.setVisible(true);
         for (int i = 0; i < boardSquares; i++) {
             //Creo un nuevo label y le asigno su posicion como nombre/texto.
             JLabel label = new JLabel(String.valueOf(i + 1));
@@ -712,9 +719,8 @@ public class Board extends javax.swing.JFrame {
     private javax.swing.ButtonGroup answers;
     private javax.swing.JLabel help;
     private javax.swing.JButton hint;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton newGame;
     private javax.swing.JRadioButton option1;
     private javax.swing.JRadioButton option2;
     private javax.swing.JRadioButton option3;
