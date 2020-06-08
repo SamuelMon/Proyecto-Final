@@ -24,7 +24,7 @@ public class IniciarNuevoJuego extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        jLabel4.setVisible(false); 
+        jLabel4.setVisible(false);
         sizeBoard.setVisible(false);
         padre = (Board) parent;
         sizeBoard.setTransferHandler(null);
@@ -164,13 +164,13 @@ public class IniciarNuevoJuego extends javax.swing.JDialog {
         if (predet.isSelected()) {
             num = 30;
             if (onePlayer.isSelected()) {
-                padre.singleplayer(num);
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Intenta hacer el mayor número de puntos en el menor tiempo.");
+                padre.singleplayer(num);
             } else if (twoPlayers.isSelected()) {
-                padre.multiplayer(num);
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "El ganador será el jugador que responda primero la pregunta de la última casilla.");
+                padre.multiplayer(num);
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor seleccione una de las opciones para el número de jugadores");
             }
@@ -179,17 +179,17 @@ public class IniciarNuevoJuego extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Introduzca algún número antes de dar click en el botón.");
             } else {
                 num = Integer.parseInt(sizeBoard.getText());
-                if (num < 5) {
-                    JOptionPane.showMessageDialog(null, "Por favor, introduzca un tamaño de al menos 5 unidades.");
+                if (num < 5 || num > 1000) {
+                    JOptionPane.showMessageDialog(null, "Por favor, introduzca un tamaño de entre 5 y 1000 unidades");
                 } else {
                     if (onePlayer.isSelected()) {
-                        padre.singleplayer(num);
                         this.dispose();
                         JOptionPane.showMessageDialog(null, "Intenta hacer el mayor número de puntos en el menor tiempo.");
+                        padre.singleplayer(num);
                     } else if (twoPlayers.isSelected()) {
-                        padre.multiplayer(num);
                         this.dispose();
                         JOptionPane.showMessageDialog(null, "El ganador será el jugador que responda primero la pregunta de la última casilla.");
+                        padre.multiplayer(num);
                     } else {
                         JOptionPane.showMessageDialog(null, "Por favor seleccione una de las opciones para el número de jugadores");
                     }
